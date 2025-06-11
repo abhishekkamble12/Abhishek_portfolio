@@ -2,21 +2,21 @@ import React from 'react';
 
 const certifications = [
   {
-    title: 'Full Stack Web Development',
+    title: ' Web Development',
     issuer: 'Abhishek Kamble',
     year: 2024,
     link: '/certificates/certificate1.png',
     image: '/certificates/certificate1.png',
   },
   {
-    title: 'React Advanced',
+    title: 'Python  Advanced',
     issuer: 'Abhishek Kamble',
     year: 2023,
     link: '/certificates/certificate2.png',
     image: '/certificates/certificate2.png',
   },
   {
-    title: 'Node.js Mastery',
+    title: 'Ai-ml ',
     issuer: 'Abhishek Kamble',
     year: 2023,
     link: '/certificates/certificate3.png',
