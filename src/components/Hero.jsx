@@ -15,6 +15,9 @@ const Hero = () => (
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">React</span>
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Javascript</span>
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Node.js</span>
+        <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Django</span>
+        <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Langchain</span>
+        <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">GSAP<span>
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">PostgreSQL</span>
       </div>
       <div className="flex gap-4 mb-8">
