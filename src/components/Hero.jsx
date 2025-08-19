@@ -18,6 +18,8 @@ const Hero = () => (
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Django</span>
 
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Langchain</span>
+        <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">LangGrapgh</span>
+        <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">Docker</span>
         <span className="px-4 py-1 bg-[#23235b] text-white rounded-full">PostgreSQL</span>
       </div>
       <div className="flex gap-4 mb-8">
