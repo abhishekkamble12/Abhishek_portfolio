@@ -1,46 +1,63 @@
-import React from 'react';
+import { motion } from 'framer-motion';
+import { Award, ExternalLink } from 'lucide-react';
 
 const certifications = [
   {
-    title: ' Web Development',
-    issuer: 'Abhishek Kamble',
-    year: 2024,
-    link: '/certificates/certificate1.png',
-    image: '/certificates/certificate1.png',
-  },
-  {
-    title: 'Python  Advanced',
-    issuer: 'Abhishek Kamble',
-    year: 2023,
-    link: '/certificates/certificate2.png',
-    image: '/certificates/certificate2.png',
-  },
-  {
-    title: 'Ai-ml ',
-    issuer: 'Abhishek Kamble',
-    year: 2023,
-    link: '/certificates/certificate3.png',
-    image: '/certificates/certificate3.png',
-  },
+    id: 1,
+    title: "OCI AI Foundations Associate",
+    issuer: "Oracle Cloud Infrastructure",
+    date: "2025",
+    image: "https://via.placeholder.com/100", // Replace with logo
+    link: "#"
+  }
 ];
 
-const Certifications = () => (
-  <section id="certifications" className="py-24 px-8 bg-gradient-to-br from-[#232526] to-[#1a1a2e]">
-    <h2 className="text-4xl font-extrabold text-purple-400 mb-10 text-center">Certifications</h2>
-    <div className="flex flex-wrap justify-center gap-8">
-      {certifications.map((cert, idx) => (
-        <div key={idx} className="bg-[#23235b] rounded-2xl shadow-lg p-6 w-80 flex flex-col items-center text-white hover:scale-105 transition-transform">
-          <a href={cert.link} target="_blank" rel="noopener noreferrer">
-            <img src={cert.image} alt={cert.title} className="mb-4 rounded-lg w-64 h-40 object-cover border-2 border-purple-400 hover:opacity-90 transition" />
-          </a>
-          <div className="text-2xl font-bold mb-2">{cert.title}</div>
-          <div className="text-gray-300 text-sm mb-2">{cert.issuer}</div>
-          <div className="text-purple-400 text-lg mb-4">{cert.year}</div>
-          <a href={cert.link} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-500 rounded-lg text-white hover:bg-purple-600 transition">View Certificate</a>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+const Certifications = () => {
+  return (
+    <section id="certifications" className="py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Licenses & <span className="text-gradient">Certifications</span></h2>
+          <p className="text-gray-400">Continuous learning and professional development.</p>
+        </motion.div>
 
-export default Certifications; 
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {certifications.map((cert, index) => (
+            <motion.a
+              href={cert.link}
+              target="_blank"
+              key={cert.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="glass p-6 rounded-xl flex items-center gap-4 hover:bg-white/5 hover:border-primary/30 transition-all group"
+            >
+              <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center shrink-0">
+                <Award className="text-primary w-8 h-8 group-hover:scale-110 transition-transform" />
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                  {cert.title}
+                </h3>
+                <p className="text-sm text-gray-400 mb-1">{cert.issuer}</p>
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <span>Issued {cert.date}</span>
+                  <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Certifications;
