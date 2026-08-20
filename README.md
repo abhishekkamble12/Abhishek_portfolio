@@ -1,56 +1,73 @@
-# React + Vite
+# Abhishek Kamble — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, AI-native engineering portfolio with a FastAPI backend and React frontend.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Abhishek Kamble Portfolio
-
-A modern, responsive portfolio website built with **React**, **Vite**, and **Tailwind CSS**.
-
-## Features
-
-- Beautiful dark-themed design
-- Sections: Home, About, Projects, Certifications, Experience, Contact
-- Downloadable CV/Resume
-- Project and certificate gallery
-- Responsive and mobile-friendly
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/abhishekkamble12/Abhishek_portfolio.git
-cd Abhishek_portfolio/Frontend
+```
+Abhishek_portfolio/
+├── frontend/    → React + Vite + Tailwind (deploy → Vercel)
+├── backend/     → FastAPI + Python (deploy → Railway/Render)
+├── cv.md        → Master profile reference document
+└── plan.md      → Project vision and design decisions
 ```
 
-### 2. Install dependencies
+## Quick Start
 
+### Frontend
 ```bash
+cd frontend
 npm install
-```
-
-### 3. Run the development server
-
-```bash
 npm run dev
+# Opens http://localhost:5173
 ```
 
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-
-### 4. Build for production
-
+### Backend
 ```bash
-npm run build
+cd backend
+python -m venv .venv
+.venv\Scripts\activate        # Windows
+source .venv/bin/activate     # Linux/Mac
+pip install -r requirements.txt
+copy .env.example .env        # Edit with your values
+uvicorn app.main:app --reload --port 8000
+# API docs at http://localhost:8000/api/docs
 ```
 
-The production-ready files will be in the `dist` folder.
+## Deployment
 
-## Folder Structure
+### Frontend → Vercel
+```bash
+cd frontend
+npx vercel --prod
+```
+Set environment variable: `VITE_API_URL` = your backend URL
+
+### Backend → Railway
+1. Connect GitHub repo on Railway
+2. Set root directory to `backend/`
+3. Add env vars from `backend/.env.example`
+4. Deploy — auto-detects Dockerfile
+
+## Tech Stack
+
+**Frontend:** React 19, Vite 6, Tailwind CSS v4, Framer Motion, Lucide React
+
+**Backend:** FastAPI, Pydantic, Resend (email), Docker
+
+## Sections
+
+| Section | Description |
+|---|---|
+| Hero | Name, title, tagline, stats, social links |
+| Skills | 8 capability categories from CV |
+| Projects | 16 projects with search, filters, metrics |
+| Experience | 2 internships with detailed bullets |
+| Open Source | CNCF contributions (OpenTelemetry, KubeEdge) |
+| About | Bio, education, stats |
+| Certifications | 5 professional certifications |
+| Contact | Form wired to backend API |
+
+## License
+
+Personal portfolio — all rights reserved.

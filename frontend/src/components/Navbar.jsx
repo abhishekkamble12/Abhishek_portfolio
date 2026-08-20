@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code2 } from 'lucide-react';
+import { profile } from '../data/profile';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,10 +18,12 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', to: 'hero' },
+    { name: 'Ask AI', to: 'ai-assistant' },
     { name: 'Skills', to: 'skills' },
-    { name: 'About', to: 'about' },
-    { name: 'Projects', to: 'portfolio' },
+    { name: 'Projects', to: 'projects' },
     { name: 'Experience', to: 'experience' },
+    { name: 'Open Source', to: 'opensource' },
+    { name: 'About', to: 'about' },
     { name: 'Contact', to: 'contact' },
   ];
 
@@ -52,9 +55,10 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <a 
-            href="/resume.pdf" 
-            target="_blank" 
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-full text-sm font-medium transition-all hover:shadow-[0_0_20px_rgba(139,92,246,0.5)]"
           >
             Resume
@@ -62,9 +66,10 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden text-gray-300 hover:text-white"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -87,15 +92,18 @@ const Navbar = () => {
                   smooth={true}
                   duration={500}
                   offset={-70}
+                  spy={true}
+                  activeClass="text-primary font-semibold"
                   onClick={() => setIsOpen(false)}
-                  className="text-gray-300 hover:text-primary py-2 text-lg font-medium"
+                  className="text-gray-300 hover:text-primary py-2 text-lg font-medium cursor-pointer"
                 >
                   {link.name}
                 </Link>
               ))}
-              <a 
-                href="/resume.pdf" 
+              <a
+                href="/resume.pdf"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="mt-2 px-5 py-3 bg-primary text-white text-center rounded-lg font-medium"
               >
                 Download Resume
@@ -109,4 +117,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
