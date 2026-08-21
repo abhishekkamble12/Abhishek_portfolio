@@ -182,7 +182,7 @@ export const projects = [
       "Multimodal deep learning system combining 41K+ environmental records and computer vision pipelines for coral anomaly detection with Grad-CAM explainability.",
     metrics: ["41K+ environmental records", "EfficientNet-B3 transfer learning"],
     tech: ["Python", "TensorFlow", "EfficientNet", "Grad-CAM", "W&B"],
-    github: "https://github.com/abhishekkamble12",
+    github: "https://github.com/abhishekkamble12/CoralGuard_AI",
     demo: null,
   },
   {
