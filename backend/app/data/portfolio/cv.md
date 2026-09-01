@@ -157,7 +157,23 @@ GitHub: github.com/abhishekkamble12/foodgram_mern
 - n8n + OpenAI + Airtable + Slack
 - Routes WhatsApp/Telegram messages through an LLM-backed knowledge base with human handoff
 
-### 15. Sentiment_analysis_mlopsss — AI-Native Sentiment Intelligence Platform
+### 15. Retail Customer Behavior Analytics — End-to-End Data Analytics & BI Pipeline
+- Comprehensive retail analytics platform spanning the complete data lifecycle
+- **Data Preparation & EDA (Python)**: Cleaning and transforming raw retail datasets using Pandas and NumPy; exploratory data analysis with Jupyter Notebooks to uncover initial patterns and data quality issues
+- **Data Analysis (SQL)**: Writing complex SQL queries to extract actionable insights on customer segmentation, loyalty program effectiveness, and key purchase drivers; optimized queries for large transaction datasets
+- **Visualization (Power BI)**: Designed and deployed interactive dashboards highlighting key business patterns, trends, and metrics for stakeholder decision-making
+- **Reporting**: Created structured project reports and presentations communicating findings and actionable recommendations to business teams
+- **Key Skills**: Power BI, Python, SQL, Data Cleaning, Data Transformation, Exploratory Data Analysis (EDA), Business Intelligence, Relational Data Modeling
+
+### 16. Amazon Sales Performance & Revenue Analytics — Multi-Stage Data Analysis & KPI Dashboard
+- End-to-end sales analytics platform combining data engineering, analysis, and business intelligence
+- **End-to-End Data Analysis**: Extracted, cleaned, and analyzed complex Amazon sales datasets (including restaurant operations records) using Python (Pandas, NumPy) within Jupyter Notebooks to uncover actionable business insights
+- **Business Intelligence & Visualization**: Designed and deployed interactive Power BI dashboards visualizing key performance indicators (KPIs) including revenue tracking, customer behavior patterns, and sales performance metrics; enabled data-driven decision-making at scale
+- **Data Wrangling**: Engineered complex SQL queries to manipulate and transform raw sales data into optimized schemas for downstream exploratory data analysis and reporting
+- **Key Metrics**: Revenue trending, customer acquisition analysis, product performance tracking, margin analysis, KPI dashboards with real-time updates
+- **Key Skills**: Python, Pandas, NumPy, SQL, Power BI, Exploratory Data Analysis (EDA), Data Visualization, KPI Dashboard Development, Data Transformation
+
+### 17. Sentiment_analysis_mlopsss — AI-Native Sentiment Intelligence Platform
 GitHub: github.com/abhishekkamble12/Sentiment_analysis_mlopsss
 - FastAPI/Uvicorn service with a tiered model: fast classical model (TF-IDF + LogisticRegression/LinearSVC) → DistilBERT refinement → LLM fallback (Gemma via HF Inference / Groq)
 - LangChain-based SearchAgent (DuckDuckGo + RSS) and ReportAgent for search-driven analysis and JSON reports
@@ -165,7 +181,7 @@ GitHub: github.com/abhishekkamble12/Sentiment_analysis_mlopsss
 - Eval results: LinearSVC deployed as Tier 1 (accuracy 0.9439, F1-weighted 0.9436, F1-macro 0.9379, latency ~1.66s); LogisticRegression/RidgeClassifier as standby ensemble (accuracy 0.9164/0.8982); RandomForest/SVM/MultinomialNB/XGBoost also evaluated; DistilBERT (Tier 2) metrics not yet finalized
 - Subject of an IEEE-format research paper draft, targeting an external IEEE conference (specific venue TBD)
 
-### 16. PacketInsight — Network Traffic Analysis
+### 18. PacketInsight — Network Traffic Analysis
 - Scapy/SQLAlchemy-based network traffic analysis tool
 - Validated against real public PCAP traces (12,899 packets, 0 skipped): flagged port scans, DNS floods (63 queries from one host), 4.23 MB high-volume flows
 
@@ -185,9 +201,9 @@ GitHub: github.com/abhishekkamble12/Sentiment_analysis_mlopsss
 
 **Voice & NLP:** Deepgram (STT/TTS), Conversational Flow Design, Semantic Search, NLP
 
-**ML/DL:** TensorFlow, PyTorch, Scikit-learn, Keras, Transformers, Hugging Face, Grid Search, Bayesian Optimization, Transfer Learning, Explainable AI (Grad-CAM), Data Augmentation
+**ML/DL:** TensorFlow, PyTorch, Scikit-learn, LightGBM, Keras, Transformers, Hugging Face, Grid Search, Bayesian Optimization, Transfer Learning, Explainable AI (Grad-CAM), Data Augmentation, Probabilistic Forecasting
 
-**Data Science:** Pandas, NumPy, Matplotlib, Seaborn, Plotly, Feature Engineering, Data Visualization
+**Data Science & Analytics:** Pandas, NumPy, Matplotlib, Seaborn, Plotly, Feature Engineering, Data Visualization, Exploratory Data Analysis (EDA), Data Cleaning & Transformation, Relational Data Modeling, SQL Query Optimization, Business Intelligence, KPI Dashboard Development, Power BI, Tableau
 
 **Backend:** Python, Go, Django REST Framework, FastAPI, REST APIs, Async Python, JWT Auth, PostgreSQL, Node.js, Express.js
 

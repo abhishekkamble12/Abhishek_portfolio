@@ -287,6 +287,78 @@ export const projects = [
     github: null,
     demo: null,
   },
+  {
+    id: "retail-customer-analytics",
+    title: "Retail Customer Behavior Analytics",
+    subtitle: "End-to-End Data Analytics & BI Pipeline",
+    category: "Data",
+    featured: true,
+    description:
+      "Comprehensive retail analytics platform: data preparation & EDA in Python, SQL-based customer segmentation analysis, and interactive Power BI dashboards for actionable business insights.",
+    metrics: [
+      "Customer segmentation analysis",
+      "Loyalty program insights",
+      "Purchase driver analysis",
+      "Interactive BI dashboards",
+    ],
+    tech: ["Python", "SQL", "Power BI", "Jupyter", "Pandas", "NumPy", "Data Cleaning"],
+    github: null,
+    demo: null,
+  },
+  {
+    id: "amazon-sales-analytics",
+    title: "Amazon Sales Performance & Revenue Analytics",
+    subtitle: "Multi-Stage Data Analysis & KPI Dashboard",
+    category: "Data",
+    featured: true,
+    description:
+      "End-to-end sales analytics: data extraction & cleaning with Python (Pandas, NumPy), SQL-driven business intelligence queries, and interactive Power BI KPI dashboards for revenue tracking and customer behavior insights.",
+    metrics: [
+      "Complex dataset analysis",
+      "KPI dashboards",
+      "Revenue tracking",
+      "Actionable business insights",
+    ],
+    tech: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "SQL",
+      "Power BI",
+      "Exploratory Data Analysis",
+      "Data Visualization",
+    ],
+    github: null,
+    demo: null,
+  },
+  {
+    id: "supplysense-enhanced",
+    title: "SupplySense",
+    subtitle: "Probabilistic Demand Forecasting & Inventory Engine",
+    category: "Data",
+    featured: true,
+    description:
+      "Production-grade demand forecasting & inventory optimization platform: probabilistic P10/P50/P90 forecasts via LightGBM, stochastic safety stock calculations, and FastAPI backend serving real-time inventory decisions on 5M+ transactional records.",
+    metrics: [
+      "+34.2% lift over baseline",
+      "R² = 0.884 (RMSE 2.14, MAE 1.42)",
+      "65% RAM optimization",
+      "~40% stockout risk reduction",
+      "<120ms p50 latency",
+    ],
+    tech: [
+      "Python",
+      "FastAPI",
+      "LightGBM",
+      "Scikit-Learn",
+      "PostgreSQL",
+      "MLflow",
+      "Docker",
+      "Data Transformation",
+    ],
+    github: "https://github.com/abhishekkamble12/SupplySense",
+    demo: null,
+  },
 ];
 
 export const categories = [

@@ -18,11 +18,39 @@ export const skills = [
     ],
   },
   {
+    category: "Data Science & Analytics",
+    items: [
+      "Exploratory Data Analysis (EDA)",
+      "Data Cleaning & Transformation",
+      "Feature Engineering",
+      "Data Visualization",
+      "Relational Data Modeling",
+      "SQL Query Optimization",
+      "Statistical Analysis",
+      "KPI Dashboard Development",
+      "Business Intelligence",
+    ],
+  },
+  {
+    category: "Data Tools & BI",
+    items: [
+      "Power BI",
+      "Tableau",
+      "Jupyter Notebook",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Plotly",
+    ],
+  },
+  {
     category: "ML / Deep Learning",
     items: [
       "TensorFlow",
       "PyTorch",
       "Scikit-learn",
+      "LightGBM",
       "Keras",
       "Transformers",
       "Hugging Face",
@@ -30,6 +58,7 @@ export const skills = [
       "Grad-CAM",
       "Data Augmentation",
       "Bayesian Optimization",
+      "Probabilistic Forecasting",
     ],
   },
   {
