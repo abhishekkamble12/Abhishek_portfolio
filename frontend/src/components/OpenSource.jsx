@@ -1,67 +1,67 @@
 import { motion } from 'framer-motion';
 import { GitPullRequest, CheckCircle, Trophy } from 'lucide-react';
 import { openSource, achievements } from '../data/openSource';
+import SectionHeader from './ui/SectionHeader';
 
 const OpenSource = () => {
   return (
-    <section id="opensource" className="py-24">
+    <section id="opensource" className="py-28 relative">
+      {/* Ambient background glow */}
+      <div className="absolute top-1/4 right-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
       <div className="max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <span className="section-label">04 / Open Source</span>
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Open Source Contributions
-          </h2>
-        </motion.div>
+        <SectionHeader
+          number="03"
+          label="Ecosystem & Community"
+          title="Open Source & Honors"
+          subtitle="Direct code contributions to CNCF distributed tracing and edge computing projects through the Linux Foundation LFX Mentorship."
+          badge="CNCF Contributor"
+        />
 
         {/* GitHub-style PR cards */}
-        <div className="space-y-4 mb-16">
+        <div className="space-y-5 mb-20">
           {openSource.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="card rounded-xl p-6"
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ delay: index * 0.12 }}
+              className="card rounded-xl p-6 md:p-8 hover:border-accent/40 transition-all shadow-lg bg-surface/90 backdrop-blur-sm"
             >
               {/* Repo header */}
-              <div className="flex items-center gap-2 mb-3">
-                <span className="mono text-xs text-accent px-2 py-0.5 bg-accent/10 rounded-md border border-accent/10">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="mono text-xs text-accent px-2.5 py-1 bg-accent/10 rounded-md border border-accent/20">
                   {project.org}
                 </span>
-                <span className="mono text-sm text-white font-medium">
+                <span className="mono text-sm sm:text-base text-white font-semibold">
                   {project.repo}
                 </span>
               </div>
 
-              <p className="text-sm text-text-body mb-4 leading-relaxed max-w-3xl">
+              <p className="text-sm text-text-body mb-5 leading-relaxed max-w-3xl">
                 {project.description}
               </p>
 
               {/* PR list */}
-              <div className="space-y-2 mb-4">
+              <div className="space-y-2 mb-5">
                 {project.prs.map((pr) => (
                   <a
                     key={pr.number}
                     href={pr.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-accent/5 transition-colors group"
+                    className="flex items-center gap-3 px-3.5 py-2.5 rounded-lg bg-surface hover:bg-accent/10 border border-border hover:border-accent/30 transition-colors group cursor-pointer"
                   >
-                    <GitPullRequest size={14} className="text-accent shrink-0" />
+                    <GitPullRequest size={15} className="text-accent shrink-0" />
                     <span className="mono text-xs text-text-muted">
                       #{pr.number}
                     </span>
-                    <span className="text-sm text-text-body group-hover:text-white transition-colors">
+                    <span className="text-sm text-text-body group-hover:text-white transition-colors truncate">
                       {pr.title}
                     </span>
-                    <span className="ml-auto flex items-center gap-1 mono text-[10px] text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full border border-green-400/20 shrink-0">
-                      <CheckCircle size={10} />
+                    <span className="ml-auto flex items-center gap-1 mono text-[11px] text-green-400 bg-green-400/10 px-2.5 py-0.5 rounded-full border border-green-400/20 shrink-0">
+                      <CheckCircle size={11} />
                       Merged
                     </span>
                   </a>
@@ -69,11 +69,11 @@ const OpenSource = () => {
               </div>
 
               {/* Tech */}
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/60">
                 {project.tech.map((t) => (
                   <span
                     key={t}
-                    className="mono text-[10px] text-text-muted px-2 py-0.5 bg-surface rounded border border-border"
+                    className="mono text-[11px] text-text-muted px-2.5 py-0.5 bg-surface rounded border border-border"
                   >
                     {t}
                   </span>
@@ -87,22 +87,29 @@ const OpenSource = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-60px' }}
         >
-          <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-            <Trophy size={16} className="text-accent" />
-            Achievements
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="flex items-center gap-2 mb-4">
+            <Trophy size={18} className="text-accent" />
+            <h3 className="text-xl font-bold text-white tracking-tight font-display">
+              Hackathons & Competitive Ratings
+            </h3>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {achievements.map((a) => (
-              <div key={a.label} className="card rounded-lg px-4 py-3">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-white">
-                    {a.label}
-                  </span>
-                  <span className="mono text-xs text-accent">{a.value}</span>
+              <div
+                key={a.label}
+                className="card rounded-xl p-4 hover:border-accent/40 transition-colors bg-surface/80 backdrop-blur-sm"
+              >
+                <div className="mono text-xs text-accent font-semibold mb-1">
+                  {a.value}
                 </div>
-                <p className="text-xs text-text-muted">{a.detail}</p>
+                <div className="text-sm font-bold text-white mb-1">
+                  {a.label}
+                </div>
+                <p className="text-xs text-text-muted leading-relaxed">
+                  {a.detail}
+                </p>
               </div>
             ))}
           </div>

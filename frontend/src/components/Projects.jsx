@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Search, ArrowUpRight } from 'lucide-react';
+import { Github, Search, ArrowUpRight } from 'lucide-react';
 import { projects, categories } from '../data/projects';
 import ProjectCard from './ProjectCard';
+import SectionHeader from './ui/SectionHeader';
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
@@ -27,23 +28,22 @@ const Projects = () => {
   });
 
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="py-28 relative">
+      {/* Background ambient spotlight for the section */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
       <div className="max-w-5xl mx-auto px-6">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <span className="section-label">01 / Work</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-            Featured Projects
-          </h2>
-        </motion.div>
+        <SectionHeader
+          number="01"
+          label="Featured Systems"
+          title="Architected & Deployed"
+          subtitle="Production-grade multi-agent architectures, citation-grounded RAG engines, and high-throughput distributed backends."
+          badge="Production Ready"
+        />
 
         {/* ============ Bento Grid — Featured with GSAP 3D Tilt ============ */}
-        <div className="grid md:grid-cols-2 gap-5 mb-20">
+        <div className="grid md:grid-cols-2 gap-5 mb-24">
           {filteredFeatured.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
@@ -51,22 +51,30 @@ const Projects = () => {
 
         {/* ============ More Projects — Compact List ============ */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <span className="section-label">02 / More</span>
-          <h3 className="text-2xl font-bold mb-6 text-white tracking-tight">
-            All Projects & Systems
+          <div className="flex items-center gap-2 mb-3">
+            <span className="mono text-xs text-accent font-semibold uppercase tracking-wider">
+              Archive // Directory
+            </span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-white tracking-tight font-display">
+            All Systems & Implementations
           </h3>
+          <p className="text-text-muted text-sm mb-6 max-w-xl">
+            Explore microservices, ML pipelines, utility tools, and full-stack applications.
+          </p>
 
-          {/* Search */}
+          {/* Search Bar */}
           <div className="relative max-w-sm mb-5">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted w-4 h-4" />
             <input
               type="text"
-              placeholder="Search by name, tech or skill..."
+              placeholder="Filter by keyword (e.g. LangGraph, Go, Celery)..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-surface border border-border rounded-lg pl-10 pr-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent transition-colors mono"
@@ -93,7 +101,7 @@ const Projects = () => {
         </motion.div>
 
         {/* Compact project rows */}
-        <div className="border border-border rounded-xl overflow-hidden bg-surface/50 backdrop-blur-sm">
+        <div className="border border-border rounded-xl overflow-hidden bg-surface/50 backdrop-blur-sm shadow-xl">
           <AnimatePresence>
             {filteredAll.map((project, index) => (
               <motion.div

@@ -120,6 +120,8 @@ const TypingIndicator = () => (
   </div>
 );
 
+import SectionHeader from './ui/SectionHeader';
+
 const AIAssistant = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -215,23 +217,18 @@ const AIAssistant = () => {
   };
 
   return (
-    <section id="ai-assistant" className="py-24">
+    <section id="ai-assistant" className="py-28 relative">
+      {/* Ambient background glow */}
+      <div className="absolute top-1/3 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
       <div className="max-w-5xl mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <span className="section-label">Ask AI</span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Ask About My Work
-          </h2>
-          <p className="text-text-muted max-w-xl text-sm">
-            AI-powered answers grounded in my actual portfolio. RAG retrieval + Llama 3.3 70B — no hallucinations, only evidence.
-          </p>
-        </motion.div>
+        <SectionHeader
+          number="04"
+          label="Interactive Intelligence"
+          title="Ask About My Architecture & Experience"
+          subtitle="Query my actual engineering codebase, architecture decisions, and metrics via a live RAG-grounded AI assistant."
+          badge="Live Agent"
+        />
 
         <div className="grid lg:grid-cols-[1fr_280px] gap-6">
           {/* Main Chat Panel */}
