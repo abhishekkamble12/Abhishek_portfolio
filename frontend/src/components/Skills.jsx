@@ -12,34 +12,38 @@ const Skills = () => {
           className="mb-12"
         >
           <span className="section-label">05 / Skills</span>
-          <h2 className="text-3xl md:text-4xl font-bold">
+          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
             Engineering Capabilities
           </h2>
         </motion.div>
 
-        {/* 5 columns on desktop, 2-3 on tablet, 1 on mobile */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {/* 5 columns on desktop, 2-3 on tablet */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {skills.map((group, index) => (
             <motion.div
               key={group.category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
+              transition={{ delay: index * 0.06 }}
+              className="card rounded-xl p-5 border border-border/80 hover:border-accent/40 transition-colors flex flex-col justify-between"
             >
-              <h3 className="mono text-xs text-accent mb-3 font-medium">
-                {group.category}
-              </h3>
-              <ul className="space-y-1.5">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="text-sm text-text-body"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <div>
+                <h3 className="mono text-xs text-accent mb-4 font-semibold tracking-wide uppercase">
+                  {group.category}
+                </h3>
+                <ul className="space-y-2">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="text-xs md:text-sm text-text-body hover:text-white transition-colors flex items-start gap-1.5"
+                    >
+                      <span className="text-accent/60 mono text-xs mt-0.5">›</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           ))}
         </div>
