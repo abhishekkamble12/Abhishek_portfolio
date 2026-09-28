@@ -1,100 +1,96 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, FileText, MapPin } from 'lucide-react';
 import { Link } from 'react-scroll';
 import { profile } from '../data/profile';
 
+const metricChips = [
+  { label: 'RAGAS Faithfulness', value: '0.923' },
+  { label: 'CNCF PRs Merged', value: '2' },
+  { label: 'LeetCode', value: '1600+' },
+];
+
 const Hero = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Background Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-[100px]" />
+    <section
+      id="hero"
+      className="min-h-screen flex items-center relative overflow-hidden pt-20"
+    >
+      {/* Subtle spotlight — replaces blurred blobs */}
+      <div className="hero-spotlight" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      {/* Dot grid texture */}
+      <div className="absolute inset-0 dot-grid opacity-30" />
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
-          <div className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-6">
-            <span className="text-primary font-medium">Available for Work</span>
+          {/* Availability badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 card rounded-full mb-8">
+            <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+            <span className="text-accent mono text-xs font-medium">
+              Open to Work
+            </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
+          {/* Name */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-[1.1] text-white">
             {profile.name}
           </h1>
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gradient">
-            {profile.title}
-          </h2>
 
-          <p className="text-gray-400 text-lg mb-8 max-w-2xl leading-relaxed">
-            {profile.tagline}
+          {/* Headline — result-oriented */}
+          <p className="text-xl md:text-2xl text-text-body mb-4 max-w-2xl leading-relaxed">
+            I build{' '}
+            <span className="text-accent font-medium">RAG and agent backends</span>{' '}
+            that ship.
           </p>
 
-          <div className="flex flex-wrap gap-4 mb-12">
+          {/* Location + availability */}
+          <div className="flex items-center gap-2 text-text-muted text-sm mb-10 mono">
+            <MapPin size={14} />
+            <span>{profile.location}</span>
+            <span className="mx-2">·</span>
+            <span>{profile.education.degree.split(',')[0]}</span>
+          </div>
+
+          {/* Metric chips */}
+          <div className="flex flex-wrap gap-3 mb-10">
+            {metricChips.map((chip) => (
+              <div
+                key={chip.label}
+                className="card px-4 py-3 rounded-lg"
+              >
+                <div className="text-xl font-bold text-white mono">
+                  {chip.value}
+                </div>
+                <div className="text-xs text-text-muted mono mt-0.5">
+                  {chip.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4">
             <Link
               to="projects"
               smooth={true}
               offset={-70}
-              className="px-8 py-4 bg-primary hover:bg-primary/90 text-white rounded-full font-medium flex items-center gap-2 transition-all hover:scale-105 cursor-pointer"
+              className="px-7 py-3.5 bg-accent hover:bg-accent/90 text-bg rounded-lg font-medium flex items-center gap-2 transition-all cursor-pointer text-sm"
             >
-              Explore My Work <ArrowRight size={20} />
-            </Link>
-            <Link
-              to="contact"
-              smooth={true}
-              offset={-70}
-              className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-full font-medium transition-all hover:scale-105 cursor-pointer"
-            >
-              Contact Me
+              View Work <ArrowRight size={16} />
             </Link>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-full font-medium transition-all hover:scale-105"
+              className="px-7 py-3.5 card-hover rounded-lg font-medium flex items-center gap-2 transition-all text-sm text-white"
             >
+              <FileText size={16} />
               Resume
-            </a>
-          </div>
-
-          {/* Evidence Strip */}
-          <div className="flex flex-wrap gap-8 mb-12">
-            {profile.stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Social Links */}
-          <div className="flex gap-6">
-            <a
-              href={profile.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="GitHub"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href={profile.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href={`mailto:${profile.email}`}
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="Email"
-            >
-              <Mail size={24} />
             </a>
           </div>
         </motion.div>

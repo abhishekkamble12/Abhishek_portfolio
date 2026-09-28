@@ -1,10 +1,19 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import {
+  Mail,
+  Github,
+  Linkedin,
+  Copy,
+  CheckCircle,
+  Send,
+  AlertCircle,
+} from 'lucide-react';
 import { profile } from '../data/profile';
 import { submitContact } from '../lib/api';
 
 const Contact = () => {
+  const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +22,16 @@ const Contact = () => {
   });
   const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
   const [errorMsg, setErrorMsg] = useState('');
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback: do nothing
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,96 +53,111 @@ const Contact = () => {
   };
 
   const inputClass =
-    'w-full bg-dark-lighter border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:shadow-[0_0_10px_rgba(139,92,246,0.2)] transition-all';
+    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-accent transition-colors mono';
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10" />
-
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="contact" className="py-24">
+      <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get in <span className="text-gradient">Touch</span>
+          <span className="section-label">07 / Contact</span>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Let's Build Something
           </h2>
-          <p className="text-gray-400">Let's build something amazing together.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
+          {/* Left — quick links */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-white">Contact Information</h3>
-            <p className="text-gray-400 leading-relaxed">
-              I'm currently available for freelance work and full-time opportunities.
-              If you have a project that needs some creative touch, let's connect.
+            <p className="text-text-body leading-relaxed">
+              I'm available for full-time opportunities and interesting
+              collaborations. Reach out via email or connect on LinkedIn.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 text-gray-300">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-primary">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="hover:text-primary transition-colors"
-                  >
-                    {profile.email}
-                  </a>
+            {/* Email with copy */}
+            <button
+              onClick={copyEmail}
+              className="card-hover rounded-xl px-5 py-4 flex items-center gap-3 w-full text-left group"
+            >
+              <div className="p-2 bg-accent/10 rounded-lg">
+                <Mail size={18} className="text-accent" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-xs text-text-muted mono">Email</div>
+                <div className="text-sm text-white truncate">
+                  {profile.email}
                 </div>
               </div>
+              {copied ? (
+                <CheckCircle size={16} className="text-green-400 shrink-0" />
+              ) : (
+                <Copy
+                  size={16}
+                  className="text-text-muted group-hover:text-accent transition-colors shrink-0"
+                />
+              )}
+            </button>
 
-              <div className="flex items-center gap-4 text-gray-300">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-primary">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Location</p>
-                  <p>{profile.location}</p>
-                </div>
-              </div>
+            {/* Social links */}
+            <div className="flex gap-3">
+              <a
+                href={profile.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-hover rounded-xl px-5 py-4 flex items-center gap-3 flex-1 group"
+              >
+                <Github size={18} className="text-text-muted group-hover:text-accent transition-colors" />
+                <span className="text-sm text-white">GitHub</span>
+              </a>
+              <a
+                href={profile.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-hover rounded-xl px-5 py-4 flex items-center gap-3 flex-1 group"
+              >
+                <Linkedin size={18} className="text-text-muted group-hover:text-accent transition-colors" />
+                <span className="text-sm text-white">LinkedIn</span>
+              </a>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Right — contact form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass p-8 rounded-2xl border border-white/10"
+            className="card rounded-xl p-6"
           >
             {status === 'success' ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <CheckCircle className="text-green-400 w-16 h-16 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Message Sent!
+              <div className="flex flex-col items-center justify-center py-8 text-center">
+                <CheckCircle className="text-accent w-12 h-12 mb-3" />
+                <h3 className="text-lg font-bold text-white mb-2">
+                  Message Sent
                 </h3>
-                <p className="text-gray-400 mb-6">
-                  Thank you for reaching out. I'll get back to you soon.
+                <p className="text-text-muted text-sm mb-4">
+                  Thanks for reaching out. I'll get back to you soon.
                 </p>
                 <button
                   onClick={() => setStatus(null)}
-                  className="px-6 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm text-white transition-colors"
+                  className="px-4 py-2 bg-accent/10 text-accent rounded-lg text-sm transition-colors hover:bg-accent/20 mono"
                 >
-                  Send Another Message
+                  Send Another
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm text-gray-400" htmlFor="name">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-text-muted mono mb-1 block" htmlFor="name">
                       Name
                     </label>
                     <input
@@ -133,12 +167,11 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="John Doe"
                       className={inputClass}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm text-gray-400" htmlFor="email">
+                  <div>
+                    <label className="text-xs text-text-muted mono mb-1 block" htmlFor="email">
                       Email
                     </label>
                     <input
@@ -148,14 +181,13 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="john@example.com"
                       className={inputClass}
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm text-gray-400" htmlFor="subject">
+                <div>
+                  <label className="text-xs text-text-muted mono mb-1 block" htmlFor="subject">
                     Subject
                   </label>
                   <input
@@ -165,13 +197,12 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Project Inquiry"
                     className={inputClass}
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm text-gray-400" htmlFor="message">
+                <div>
+                  <label className="text-xs text-text-muted mono mb-1 block" htmlFor="message">
                     Message
                   </label>
                   <textarea
@@ -181,28 +212,27 @@ const Contact = () => {
                     required
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project..."
                     className={`${inputClass} resize-none`}
-                  ></textarea>
+                  />
                 </div>
 
                 {status === 'error' && (
                   <div className="flex items-center gap-2 text-red-400 text-sm">
-                    <AlertCircle size={16} />
-                    {errorMsg || 'Something went wrong. Please try again.'}
+                    <AlertCircle size={14} />
+                    <span className="mono text-xs">{errorMsg || 'Something went wrong.'}</span>
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-4 rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-accent text-bg font-medium py-3 rounded-lg hover:bg-accent/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
                   {status === 'sending' ? (
                     'Sending...'
                   ) : (
                     <>
-                      Send Message <Send size={20} />
+                      Send Message <Send size={14} />
                     </>
                   )}
                 </button>

@@ -1,62 +1,47 @@
 import { motion } from 'framer-motion';
-import { Award, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { certifications } from '../data/certifications';
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-20 bg-dark-lighter/30">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="certifications" className="py-12">
+      <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Licenses & <span className="text-gradient">Certifications</span>
-          </h2>
-          <p className="text-gray-400">
-            Continuous learning and professional development.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certifications.map((cert, index) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="glass p-6 rounded-xl flex items-start gap-4 hover:bg-white/5 hover:border-primary/30 transition-all group"
-            >
-              <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center shrink-0">
-                <Award className="text-primary w-6 h-6 group-hover:scale-110 transition-transform" />
-              </div>
-
-              <div className="min-w-0">
-                <h3 className="text-base font-bold text-white group-hover:text-primary transition-colors">
-                  {cert.title}
-                </h3>
-                <p className="text-sm text-gray-400 mb-1">{cert.issuer}</p>
-                <p className="text-xs text-gray-500 mb-2">{cert.description}</p>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <span>Issued {cert.date}</span>
-                  {cert.link && cert.link !== '#' && (
-                    <a
-                      href={cert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary/80 transition-colors"
-                    >
-                      <ExternalLink size={12} />
-                    </a>
-                  )}
+          <span className="section-label">Certifications</span>
+          {/* Compact logo row */}
+          <div className="flex flex-wrap gap-3 mt-3">
+            {certifications.map((cert) => (
+              <a
+                key={cert.id}
+                href={cert.link !== '#' ? cert.link : undefined}
+                target={cert.link !== '#' ? '_blank' : undefined}
+                rel={cert.link !== '#' ? 'noopener noreferrer' : undefined}
+                className={`card rounded-lg px-4 py-2.5 flex items-center gap-2 group ${
+                  cert.link !== '#'
+                    ? 'hover:border-accent/30 cursor-pointer'
+                    : 'cursor-default'
+                } transition-colors`}
+              >
+                <div>
+                  <span className="text-sm text-white font-medium group-hover:text-accent transition-colors">
+                    {cert.title}
+                  </span>
+                  <span className="mx-2 text-text-muted">·</span>
+                  <span className="mono text-xs text-text-muted">
+                    {cert.issuer}
+                  </span>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                {cert.link !== '#' && (
+                  <ExternalLink size={12} className="text-text-muted shrink-0" />
+                )}
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

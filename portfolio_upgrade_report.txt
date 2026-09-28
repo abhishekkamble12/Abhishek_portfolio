@@ -1,0 +1,274 @@
+PORTFOLIO FRONTEND UPGRADE PLAN
+As of 2026-09-28
+
+======================================================================
+1. AUDIT
+======================================================================
+
+The content is strong, but the site looks like a template and has broken
+parts. A recruiter spends about 30 seconds on it, and right now those
+seconds go to purple gradients, a 95-chip skills wall and a Resume button
+that 404s.
+
+What already works:
+  - Real, quantified work: RAGAS 0.923 faithfulness, 1,000+ tasks per
+    10 minutes, merged CNCF pull requests (OpenTelemetry #992, #1107;
+    KubeEdge Ianvs #816).
+  - Clean data layer: all content lives in src/data/*.js, so a redesign
+    only touches components.
+  - A working RAG assistant that answers questions about you. Few student
+    portfolios have this.
+
+What holds it back:
+  - Generic look. Violet/blue/cyan gradient text, glass cards and blurred
+    blobs are the default AI-template style. Every heading uses the same
+    "Word GradientWord" pattern.
+  - Broken links. Hero, navbar and mobile menu all link to /resume.pdf,
+    which is not in public/. The only PDF is
+    certificates/protfolio_sde (1).pdf.
+  - No clear focus. The title says AI/ML and software engineer, while the
+    featured grid mixes RAG platforms with Power BI dashboards. Pick one
+    headline role and let the rest support it.
+  - Too much, same weight. 18 projects, 10 skill groups and 8 nav links
+    all get equal visual weight, so nothing stands out.
+  - No face, no visuals. The About avatar is a placeholder icon. No
+    project has a screenshot, architecture diagram or demo link.
+  - Assistant depends on the backend. VITE_API_URL defaults to
+    localhost:8000, and vercel.json deploys only the frontend. If the API
+    is not hosted, the second section on the page fails for every visitor.
+
+======================================================================
+2. CONTENT FIXES
+======================================================================
+
+Fix these before any visual work. Each one is a small edit in src/data/,
+and each one is something a reviewer would notice.
+
+  Problem: Resume button returns 404
+  Where:   Hero.jsx, Navbar.jsx -> /resume.pdf
+  Fix:     Put the PDF at public/resume.pdf. Remove the .docx from
+           public/, since it is downloadable by anyone.
+
+  Problem: SupplySense listed twice
+  Where:   projects.js: "supplysense" and "supplysense-enhanced"
+  Fix:     Keep the enhanced entry and delete the other.
+
+  Problem: 7 featured projects in a 2-column grid
+  Where:   projects.js featured: true
+  Fix:     Feature 4: Arishem, Sampark AI, QueueFlow, SupplySense. One
+           orphan card in the last row looks unfinished.
+
+  Problem: Featured cards ignore search and filter
+  Where:   Projects.jsx
+  Fix:     Use one list: featured on top, with search and filter applied
+           to both.
+
+  Problem: GitHub icon opens your profile page, not the repo
+  Where:   Sampark AI, REDROB, Vehicle Insurance, PacketInsight
+  Fix:     Link each to its repo, or hide the icon.
+
+  Problem: No live demos
+  Where:   every demo: null
+  Fix:     Add at least one: a Loom walkthrough, a hosted Swagger UI, or
+           a Streamlit app.
+
+  Problem: Certificate links are all "#"
+  Where:   certifications.js
+  Fix:     Add the verification URLs. The PNGs in public/certificates/
+           are not used anywhere yet.
+
+  Problem: Skills appear twice
+  Where:   Pandas, NumPy, Matplotlib, Seaborn, Plotly, Feature Engineering
+  Fix:     Merge the 10 groups into 5, with 6-8 skills each.
+
+  Problem: Same stats shown twice
+  Where:   profile.stats in both Hero and About
+  Fix:     Keep them in the Hero only.
+
+  Problem: Typo in file name
+  Where:   protfolio_sde (1).pdf
+  Fix:     Rename to resume.pdf.
+
+One decision is yours: lead with AI BACKEND ENGINEER (RAG, agents,
+FastAPI). Your strongest evidence is there. Move the Power BI and
+analytics projects into the "All projects" grid under Data.
+
+======================================================================
+3. VISUAL DIRECTION
+======================================================================
+
+Aim for an "engineering notebook" look: calm, dense with real data, one
+accent color, and monospace details that show you build systems.
+Portfolios like Linear's changelog, Vercel's docs and Stripe's
+engineering blog are good references. They look expensive because they
+hold back.
+
+COLOR
+  Drop the three-color gradient. Use:
+    background   #0B0D10
+    surface      #13161B
+    borders      #232830
+    body text    #C9CED6
+    ONE accent:  signal green #3DDC97 or amber #F5A524
+  Use the accent only for links, the active nav item and key numbers.
+  Also add a light theme, since many recruiters read in light mode.
+
+TYPE
+  Keep Inter for body text. Replace Outfit with a sharper display face,
+  such as Geist, Space Grotesk or Instrument Serif for contrast. Add
+  JetBrains Mono or Geist Mono for metrics, tech tags, dates and section
+  labels ("01 / Projects"). Use a real scale: hero 64-72px, section title
+  32px, body 16-17px, line length under 70 characters.
+
+LAYOUT
+  Put content on a 12-column grid with max width about 1120px. Left-align
+  section headings instead of centering them. Use a bento grid for
+  featured projects, with one large card and three smaller ones. Leave
+  more space between sections (120-160px) and less inside cards.
+
+MOTION
+  Keep Framer Motion, but use less of it. Fade and rise once on scroll,
+  200-300ms, with no scale-in and no float/glow loops. Add one signature
+  detail: a streaming "typing" hero line from the RAG assistant, or a
+  live-counting metric strip. Respect prefers-reduced-motion.
+
+TEXTURE
+  Replace the blurred blobs with a faint dot grid or noise layer and a
+  single soft spotlight behind the hero. Use 1px borders instead of
+  glassmorphism.
+
+======================================================================
+4. SECTION BY SECTION
+======================================================================
+
+New page order:
+  Hero -> Featured work -> Experience -> Open source -> Ask my AI ->
+  Skills -> More projects -> About + contact
+
+Proof comes first and the assistant becomes a highlight, not a hurdle.
+Cut the nav to 5 links: Work, Experience, Open Source, Ask AI, Contact,
+plus the Resume button.
+
+HERO
+  Change: One headline that names a result, e.g. "I build RAG and agent
+          backends that ship." Add a small photo, a location/availability
+          line, and 3 mono metric chips (RAGAS 0.923 / 2 CNCF PRs merged /
+          1600+ LeetCode). Buttons: View work, Resume.
+  Why:    A reviewer should know your role and best proof in 5 seconds.
+
+FEATURED WORK
+  Change: Bento grid with 4 case-study cards. Each card shows a
+          screenshot or architecture diagram, a problem -> approach ->
+          result line, 3 metrics in mono, and GitHub/demo buttons.
+          Clicking opens a detail page (/projects/arishem) with the
+          diagram, stack and trade-offs.
+  Why:    Case studies show how you think. Cards of tags only show what
+          you used.
+
+EXPERIENCE
+  Change: Single-column timeline, left-aligned, with company logos. Keep
+          3 bullets per role and put the number first in each ("Cut
+          training time 3h -> 45m").
+  Why:    The zig-zag layout is hard to scan and empty on one side.
+
+OPEN SOURCE
+  Change: Show each PR as a GitHub-style card: repo name, PR number,
+          merged badge, +/- lines. Move LeetCode, CodeChef and hackathons
+          into a compact "Achievements" strip.
+  Why:    Merged CNCF PRs are rare for a student. Make them look like the
+          real thing.
+
+ASK MY AI
+  Change: Collapse to a slim bar with 3 suggested questions that expands
+          into the chat. Also add a floating "Ask about me" button in the
+          corner. If the API is down, show a friendly offline message.
+  Why:    It stays a signature feature without blocking the page.
+
+SKILLS
+  Change: 5 groups in a single row of columns, 6-8 items each, no chip
+          hover effects. Or mark 8 core skills and list the rest as plain
+          text.
+  Why:    95 equal chips reads as keyword stuffing.
+
+MORE PROJECTS
+  Change: Compact list rows: name, one-line summary, 3 tags, links. Keep
+          search and filters.
+  Why:    Makes 14 smaller projects easy to scan without competing with
+          featured work.
+
+ABOUT
+  Change: Real photo, 3 short paragraphs (what you build, what you're
+          learning now, what role you want), education line.
+  Why:    The placeholder icon makes the page feel unfinished.
+
+CERTIFICATIONS
+  Change: Logo row with verification links, or a line inside About.
+  Why:    Five certificate cards take a lot of space for low signal.
+
+CONTACT + FOOTER
+  Change: Email with a copy button, LinkedIn, GitHub, and a short form.
+          Footer: "Built with React, FastAPI and a RAG pipeline - source
+          on GitHub."
+  Why:    The footer can show your stack too.
+
+======================================================================
+5. PERFORMANCE, SEO AND ACCESSIBILITY
+======================================================================
+
+Target a Lighthouse score of 95+ in all four categories on mobile. These
+are the gaps in the current index.html and components.
+
+  [ ] Replace the Vite favicon (vite.svg) with your own monogram.
+  [ ] Add og:image (1200x630 preview card), og:url and a canonical link.
+      Shared LinkedIn links currently show no preview.
+  [ ] Add JSON-LD Person schema with name, job title and social links.
+  [ ] Self-host fonts or load only the weights you use. Currently 10
+      weights across Inter and Outfit are loaded.
+  [ ] Lazy-load the AI assistant and the project detail pages with
+      React.lazy.
+  [ ] Use WebP/AVIF screenshots with fixed width and height, to avoid
+      layout shift.
+  [ ] Raise contrast: text-gray-500 on the dark background fails WCAG AA
+      for small text.
+  [ ] Add aria-pressed to project filter buttons and visible focus rings
+      on all links and buttons.
+  [ ] Wrap animations in a prefers-reduced-motion check (Framer Motion's
+      useReducedMotion).
+  [ ] Add a custom domain (e.g. abhishekkamble.dev) instead of the
+      default Vercel URL.
+
+======================================================================
+6. ACTION PLAN
+======================================================================
+
+About 4-5 focused days in total. Step 1 takes an hour and fixes what is
+visibly broken today.
+
+STEP 1 - FIXES (1 hour)
+  [ ] Add public/resume.pdf; remove the .docx
+  [ ] Delete the duplicate SupplySense; set 4 featured projects
+  [ ] Fix repo links; hide icons with no repo
+  [ ] Confirm the backend is deployed and VITE_API_URL is set in Vercel
+
+STEP 2 - DESIGN SYSTEM (half a day)
+  [ ] New tokens in index.css: palette, one accent, fonts, spacing
+  [ ] Replace .glass, .text-gradient and the blob backgrounds
+  [ ] Add a light/dark toggle
+
+STEP 3 - HERO, FEATURED WORK AND CASE STUDIES (1-2 days)
+  [ ] New hero with photo and metric chips
+  [ ] Bento featured grid
+  [ ] Architecture diagrams for Arishem, Sampark AI, QueueFlow and
+      SupplySense (Excalidraw or draw.io export)
+  [ ] /projects/:id detail pages (add react-router-dom)
+
+STEP 4 - REMAINING SECTIONS (1 day)
+  [ ] Reorder the page and cut the nav to 5 links
+  [ ] Timeline, PR cards, compact skills, list-style project rows
+  [ ] Slim AI bar plus a floating button, with an offline fallback
+
+STEP 5 - POLISH (half a day)
+  [ ] Work through the SEO and accessibility checklist above
+  [ ] Test at 375px, 768px and 1440px widths
+  [ ] Ask 2 people to look for 30 seconds, then ask what you do. If they
+      can't say "AI backend engineer," revise the hero.

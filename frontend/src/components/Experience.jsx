@@ -1,28 +1,29 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { MapPin, Calendar } from 'lucide-react';
 import { experience } from '../data/experience';
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="experience" className="py-24">
+      <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Professional <span className="text-gradient">Journey</span>
+          <span className="section-label">03 / Experience</span>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Work Experience
           </h2>
-          <p className="text-gray-400">My career timeline and key milestones.</p>
         </motion.div>
 
+        {/* Single-column timeline, left-aligned */}
         <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-primary to-transparent opacity-30" />
+          {/* Timeline line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" />
 
-          <div className="space-y-12">
+          <div className="space-y-10">
             {experience.map((exp, index) => (
               <motion.div
                 key={exp.id}
@@ -30,75 +31,62 @@ const Experience = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative flex flex-col md:flex-row gap-8 ${
-                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                }`}
+                className="relative pl-8"
               >
-                {/* Timeline Dot */}
-                <div className="absolute left-[-5px] md:left-1/2 transform md:-translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_var(--color-primary)] z-10 mt-6" />
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full bg-bg border-2 border-accent" />
 
-                {/* Content */}
-                <div className="flex-1 ml-6 md:ml-0">
-                  <div
-                    className={`glass p-6 rounded-xl border-l-4 border-primary hover:bg-white/5 transition-colors ${
-                      index % 2 === 0 ? 'md:text-left' : 'md:text-right'
-                    }`}
-                  >
-                    <div
-                      className={`flex items-center gap-2 mb-2 text-primary text-sm font-medium ${
-                        index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
-                      }`}
-                    >
-                      <Calendar size={14} />
-                      {exp.period}
+                {/* Card */}
+                <div className="card rounded-xl p-6">
+                  {/* Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-white">
+                        {exp.role}
+                      </h3>
+                      <p className="text-accent font-medium text-sm">
+                        {exp.company}
+                      </p>
                     </div>
-
-                    <h3 className="text-xl font-bold text-white mb-1">
-                      {exp.role}
-                    </h3>
-                    <div
-                      className={`flex items-center gap-2 text-gray-400 mb-1 text-sm font-medium ${
-                        index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
-                      }`}
-                    >
-                      <Briefcase size={14} />
-                      {exp.company}
-                    </div>
-                    <div
-                      className={`flex items-center gap-2 text-gray-500 mb-4 text-xs ${
-                        index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
-                      }`}
-                    >
-                      <MapPin size={12} />
-                      {exp.location}
-                    </div>
-
-                    <ul className="space-y-2">
-                      {exp.bullets.map((bullet, i) => (
-                        <li
-                          key={i}
-                          className="text-gray-400 text-sm leading-relaxed"
-                        >
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {exp.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="text-xs px-2 py-1 bg-white/5 rounded text-gray-400"
-                        >
-                          {t}
-                        </span>
-                      ))}
+                    <div className="flex items-center gap-4 text-text-muted mono text-xs">
+                      <span className="flex items-center gap-1">
+                        <Calendar size={12} />
+                        {exp.period}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin size={12} />
+                        {exp.location}
+                      </span>
                     </div>
                   </div>
-                </div>
 
-                {/* Empty Space for alignment */}
-                <div className="flex-1 hidden md:block" />
+                  {/* Bullets — number first */}
+                  <ul className="space-y-2 mb-4">
+                    {exp.bullets.slice(0, 3).map((bullet, i) => (
+                      <li
+                        key={i}
+                        className="text-sm text-text-body leading-relaxed flex gap-2"
+                      >
+                        <span className="text-accent mono text-xs mt-0.5 shrink-0">
+                          ›
+                        </span>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="mono text-[10px] text-text-muted px-2 py-0.5 bg-surface rounded border border-border"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>

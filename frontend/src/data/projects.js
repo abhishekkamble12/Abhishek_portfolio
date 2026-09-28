@@ -58,7 +58,7 @@ export const projects = [
     title: "HiveMind",
     subtitle: "Event-Driven Media & Agentic Research Platform",
     category: "Backend",
-    featured: true,
+    featured: false,
     description:
       "Event-driven media processing platform on AWS EventBridge and Lambda, with FastAPI service layer over PostgreSQL/pgvector for semantic search.",
     metrics: [
@@ -154,24 +154,7 @@ export const projects = [
     github: "https://github.com/abhishekkamble12/LLM_Autopilot",
     demo: null,
   },
-  {
-    id: "supplysense",
-    title: "SupplySense",
-    subtitle: "Probabilistic Demand Forecasting & Inventory Engine",
-    category: "Data",
-    featured: false,
-    description:
-      "End-to-end demand forecasting platform with LightGBM, producing quantile forecasts on 5M+ records with stochastic safety stock optimization.",
-    metrics: [
-      "+34.2% lift over baseline",
-      "RMSE 2.15 units/day",
-      "65% RAM reduction",
-      "~40% stockout risk reduction",
-    ],
-    tech: ["Python", "FastAPI", "LightGBM", "MLflow", "Docker", "DagsHub"],
-    github: "https://github.com/abhishekkamble12/SupplySense",
-    demo: null,
-  },
+
   {
     id: "coralguard",
     title: "CoralGuard AI",
@@ -292,7 +275,7 @@ export const projects = [
     title: "Retail Customer Behavior Analytics",
     subtitle: "End-to-End Data Analytics & BI Pipeline",
     category: "Data",
-    featured: true,
+    featured: false,
     description:
       "Comprehensive retail analytics platform: data preparation & EDA in Python, SQL-based customer segmentation analysis, and interactive Power BI dashboards for actionable business insights.",
     metrics: [
@@ -310,7 +293,7 @@ export const projects = [
     title: "Amazon Sales Performance & Revenue Analytics",
     subtitle: "Multi-Stage Data Analysis & KPI Dashboard",
     category: "Data",
-    featured: true,
+    featured: false,
     description:
       "End-to-end sales analytics: data extraction & cleaning with Python (Pandas, NumPy), SQL-driven business intelligence queries, and interactive Power BI KPI dashboards for revenue tracking and customer behavior insights.",
     metrics: [
@@ -332,7 +315,7 @@ export const projects = [
     demo: null,
   },
   {
-    id: "supplysense-enhanced",
+    id: "supplysense",
     title: "SupplySense",
     subtitle: "Probabilistic Demand Forecasting & Inventory Engine",
     category: "Data",

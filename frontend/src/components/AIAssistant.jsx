@@ -92,29 +92,29 @@ const ConfidenceMeter = ({ confidence }) => {
   const label = pct > 60 ? 'High' : pct > 30 ? 'Medium' : 'Low';
   return (
     <div className="flex items-center gap-2 text-xs">
-      <span className="text-gray-500">Confidence</span>
-      <div className="w-16 h-1.5 bg-white/10 rounded-full overflow-hidden">
+      <span className="text-text-muted mono">Confidence</span>
+      <div className="w-16 h-1.5 bg-border rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           className={`h-full ${color} rounded-full`}
         />
       </div>
-      <span className="text-gray-500">{label}</span>
+      <span className="text-text-muted mono">{label}</span>
     </div>
   );
 };
 
 const TypingIndicator = () => (
   <div className="flex items-center gap-3">
-    <div className="w-7 h-7 bg-primary/20 rounded-full flex items-center justify-center shrink-0">
-      <Bot className="text-primary w-3.5 h-3.5" />
+    <div className="w-7 h-7 bg-accent/10 rounded-full flex items-center justify-center shrink-0">
+      <Bot className="text-accent w-3.5 h-3.5" />
     </div>
-    <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3">
+    <div className="bg-surface border border-border rounded-2xl rounded-bl-sm px-4 py-3">
       <div className="flex items-center gap-1.5">
-        <div className="w-1.5 h-1.5 bg-primary/70 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-        <div className="w-1.5 h-1.5 bg-primary/70 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-        <div className="w-1.5 h-1.5 bg-primary/70 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        <div className="w-1.5 h-1.5 bg-accent/70 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+        <div className="w-1.5 h-1.5 bg-accent/70 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+        <div className="w-1.5 h-1.5 bg-accent/70 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
       </div>
     </div>
   </div>
@@ -215,23 +215,20 @@ const AIAssistant = () => {
   };
 
   return (
-    <section id="ai-assistant" className="py-20 bg-dark-lighter/20">
+    <section id="ai-assistant" className="py-24">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
-            <Zap className="text-primary w-4 h-4" />
-            <span className="text-primary text-sm font-medium">Portfolio Intelligence</span>
-          </div>
+          <span className="section-label">Ask AI</span>
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Ask About <span className="text-gradient">My Work</span>
+            Ask About My Work
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm">
+          <p className="text-text-muted max-w-xl text-sm">
             AI-powered answers grounded in my actual portfolio. RAG retrieval + Llama 3.3 70B — no hallucinations, only evidence.
           </p>
         </motion.div>
@@ -242,14 +239,14 @@ const AIAssistant = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card rounded-2xl overflow-hidden flex flex-col"
+            className="card rounded-xl overflow-hidden flex flex-col"
             style={{ minHeight: '520px' }}
           >
             {/* Chat Header */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06]">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-border">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-sm text-gray-400">RAG-Powered Assistant</span>
+                <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+                <span className="text-sm text-text-muted mono">RAG-Powered Assistant</span>
               </div>
               {messages.length > 0 && (
                 <button
@@ -267,8 +264,8 @@ const AIAssistant = () => {
               {/* Empty State */}
               {messages.length === 0 && !loading && (
                 <div className="flex flex-col items-center justify-center h-full py-8">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-5">
-                    <Sparkles className="text-primary w-7 h-7" />
+                  <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-5">
+                    <Sparkles className="text-accent w-7 h-7" />
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">Career Intelligence</h3>
                   <p className="text-gray-500 text-sm text-center max-w-sm mb-6">
@@ -286,8 +283,8 @@ const AIAssistant = () => {
                           onClick={() => setActiveCategory(activeCategory === cat.label ? null : cat.label)}
                           className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-sm transition-all ${
                             activeCategory === cat.label
-                              ? 'bg-primary/10 border-primary/30 text-white'
-                              : 'bg-white/[0.02] border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-300'
+                              ? 'bg-accent/10 border-accent/30 text-white'
+                              : 'bg-surface border-border text-text-muted hover:border-accent/20 hover:text-white'
                           }`}
                         >
                           <Icon className={`w-4 h-4 ${cat.color}`} />
@@ -312,7 +309,7 @@ const AIAssistant = () => {
                             <button
                               key={q}
                               onClick={() => handleSubmit(q)}
-                              className="w-full text-left px-3 py-2 text-sm text-gray-400 hover:text-white bg-white/[0.02] hover:bg-primary/10 border border-white/[0.04] hover:border-primary/20 rounded-lg transition-all"
+                              className="w-full text-left px-3 py-2 text-sm text-text-muted hover:text-white bg-surface hover:bg-accent/5 border border-border hover:border-accent/20 rounded-lg transition-all"
                             >
                               {q}
                             </button>
@@ -333,15 +330,15 @@ const AIAssistant = () => {
                     className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     {msg.role === 'assistant' && (
-                      <div className="w-7 h-7 bg-primary/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                        <Bot className="text-primary w-3.5 h-3.5" />
+                      <div className="w-7 h-7 bg-accent/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <Bot className="text-accent w-3.5 h-3.5" />
                       </div>
                     )}
 
                     <div className={`max-w-[85%] ${
                       msg.role === 'user'
-                        ? 'bg-primary/15 border border-primary/25 rounded-2xl rounded-br-sm px-4 py-2.5'
-                        : 'bg-white/[0.03] border border-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-2.5'
+                        ? 'bg-accent/10 border border-accent/20 rounded-2xl rounded-br-sm px-4 py-2.5'
+                        : 'bg-surface border border-border rounded-2xl rounded-bl-sm px-4 py-2.5'
                     }`}>
                       {msg.role === 'assistant' ? (
                         <div
@@ -354,7 +351,7 @@ const AIAssistant = () => {
 
                       {/* Confidence + Sources */}
                       {msg.confidence > 0 && (
-                        <div className="mt-3 pt-2.5 border-t border-white/[0.06] space-y-2">
+                        <div className="mt-3 pt-2.5 border-t border-border space-y-2">
                           <ConfidenceMeter confidence={msg.confidence} />
                           {msg.sources && msg.sources.length > 0 && (
                             <div className="flex flex-wrap gap-1.5">
@@ -364,7 +361,7 @@ const AIAssistant = () => {
                                   to={getSectionTarget(src.type)}
                                   smooth={true}
                                   offset={-70}
-                                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary/10 text-primary/80 text-[11px] rounded-full hover:bg-primary/20 hover:text-primary transition-all cursor-pointer"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-accent/10 text-accent text-[11px] rounded-full hover:bg-accent/20 transition-all cursor-pointer mono"
                                 >
                                   {src.title.length > 30 ? src.title.slice(0, 28) + '…' : src.title}
                                   <ExternalLink size={9} />
@@ -392,10 +389,10 @@ const AIAssistant = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex gap-3"
                 >
-                  <div className="w-7 h-7 bg-primary/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                    <Bot className="text-primary w-3.5 h-3.5" />
+                  <div className="w-7 h-7 bg-accent/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                    <Bot className="text-accent w-3.5 h-3.5" />
                   </div>
-                  <div className="max-w-[85%] bg-white/[0.03] border border-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-2.5">
+                  <div className="max-w-[85%] bg-surface border border-border rounded-2xl rounded-bl-sm px-4 py-2.5">
                     {streamingMeta && <ConfidenceMeter confidence={streamingMeta.confidence} />}
                     <div
                       className="text-sm leading-relaxed text-gray-300 mt-1"
@@ -412,7 +409,7 @@ const AIAssistant = () => {
             </div>
 
             {/* Input */}
-            <div className="border-t border-white/[0.06] p-3">
+            <div className="border-t border-border p-3">
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
@@ -422,12 +419,12 @@ const AIAssistant = () => {
                   onKeyDown={handleKeyDown}
                   placeholder="Ask about projects, skills, experience..."
                   disabled={loading}
-                  className="flex-1 bg-dark/50 border border-white/[0.08] rounded-xl px-4 py-2.5 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-primary/40 transition-colors disabled:opacity-50"
+                  className="flex-1 bg-bg border border-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-text-muted focus:outline-none focus:border-accent/40 transition-colors disabled:opacity-50 mono"
                 />
                 <button
                   onClick={() => handleSubmit()}
                   disabled={loading || !input.trim()}
-                  className="px-4 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="px-4 py-2.5 bg-accent hover:bg-accent/90 text-bg rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                 </button>
@@ -443,33 +440,33 @@ const AIAssistant = () => {
             className="hidden lg:flex flex-col gap-4"
           >
             {/* How it works */}
-            <div className="glass-card rounded-xl p-4">
+            <div className="card rounded-xl p-4">
               <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Brain className="w-4 h-4 text-primary" />
+                <Brain className="w-4 h-4 text-accent" />
                 How It Works
               </h4>
               <div className="space-y-2.5 text-xs text-gray-400">
                 <div className="flex items-start gap-2">
-                  <span className="w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">1</span>
+                  <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">1</span>
                   <span>Your question is embedded and searched against the portfolio knowledge base</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">2</span>
+                  <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">2</span>
                   <span>Top relevant chunks are retrieved via TF-IDF cosine similarity</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">3</span>
+                  <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">3</span>
                   <span>Context is sent to GPT-OSS 120B (Groq) with a strict no-hallucination prompt</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">4</span>
+                  <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">4</span>
                   <span>Response streams in real-time with source citations</span>
                 </div>
               </div>
             </div>
 
             {/* Try Asking */}
-            <div className="glass-card rounded-xl p-4">
+            <div className="card rounded-xl p-4">
               <h4 className="text-sm font-semibold text-white mb-3">Recruiter Favorites</h4>
               <div className="space-y-1.5">
                 {[
@@ -483,7 +480,7 @@ const AIAssistant = () => {
                     key={q}
                     onClick={() => handleSubmit(q)}
                     disabled={loading}
-                    className="w-full text-left px-2.5 py-2 text-[11px] text-gray-400 hover:text-white bg-white/[0.02] hover:bg-primary/10 rounded-lg border border-transparent hover:border-primary/20 transition-all disabled:opacity-50"
+                    className="w-full text-left px-2.5 py-2 text-[11px] text-text-muted hover:text-white bg-surface hover:bg-accent/5 rounded-lg border border-border hover:border-accent/20 transition-all disabled:opacity-50 mono"
                   >
                     {q}
                   </button>
@@ -492,10 +489,10 @@ const AIAssistant = () => {
             </div>
 
             {/* Tech Stack Badge */}
-            <div className="glass-card rounded-xl p-4 text-center">
-              <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Powered by</p>
-              <p className="text-xs text-gray-300">
-                <span className="text-primary">Groq</span> · GPT-OSS 120B · TF-IDF · FastAPI
+            <div className="card rounded-xl p-4 text-center">
+              <p className="text-[10px] text-text-muted uppercase tracking-wider mb-1 mono">Powered by</p>
+              <p className="text-xs text-text-body mono">
+                <span className="text-accent">Groq</span> · GPT-OSS 120B · TF-IDF · FastAPI
               </p>
             </div>
           </motion.div>
