@@ -3,19 +3,13 @@ import { ArrowRight, FileText, MapPin } from 'lucide-react';
 import { Link } from 'react-scroll';
 import { profile } from '../data/profile';
 
-const metricChips = [
-  { label: 'RAGAS Faithfulness', value: '0.923' },
-  { label: 'CNCF PRs Merged', value: '2' },
-  { label: 'LeetCode', value: '1600+' },
-];
-
 const Hero = () => {
   return (
     <section
       id="hero"
       className="min-h-screen flex items-center relative overflow-hidden pt-20"
     >
-      {/* Subtle spotlight — replaces blurred blobs */}
+      {/* Subtle spotlight */}
       <div className="hero-spotlight" />
 
       {/* Dot grid texture */}
@@ -32,7 +26,7 @@ const Hero = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 card rounded-full mb-8">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             <span className="text-accent mono text-xs font-medium">
-              Open to Work
+              Open to Software & AI Engineering Roles
             </span>
           </div>
 
@@ -41,33 +35,33 @@ const Hero = () => {
             {profile.name}
           </h1>
 
-          {/* Headline — result-oriented */}
+          {/* Headline — result-oriented based on resume */}
           <p className="text-xl md:text-2xl text-text-body mb-4 max-w-2xl leading-relaxed">
             I build{' '}
-            <span className="text-accent font-medium">RAG and agent backends</span>{' '}
-            that ship.
+            <span className="text-accent font-medium">multi-agent systems, RAG platforms & distributed backends</span>{' '}
+            that ship to production.
           </p>
 
-          {/* Location + availability */}
+          {/* Location + education summary */}
           <div className="flex items-center gap-2 text-text-muted text-sm mb-10 mono">
             <MapPin size={14} />
             <span>{profile.location}</span>
             <span className="mx-2">·</span>
-            <span>{profile.education.degree.split(',')[0]}</span>
+            <span>MITAOE Pune (2023–2027)</span>
           </div>
 
-          {/* Metric chips */}
+          {/* Metric chips from resume stats */}
           <div className="flex flex-wrap gap-3 mb-10">
-            {metricChips.map((chip) => (
+            {profile.stats.map((stat) => (
               <div
-                key={chip.label}
+                key={stat.label}
                 className="card px-4 py-3 rounded-lg"
               >
                 <div className="text-xl font-bold text-white mono">
-                  {chip.value}
+                  {stat.value}
                 </div>
                 <div className="text-xs text-text-muted mono mt-0.5">
-                  {chip.label}
+                  {stat.label}
                 </div>
               </div>
             ))}
@@ -81,7 +75,7 @@ const Hero = () => {
               offset={-70}
               className="px-7 py-3.5 bg-accent hover:bg-accent/90 text-bg rounded-lg font-medium flex items-center gap-2 transition-all cursor-pointer text-sm"
             >
-              View Work <ArrowRight size={16} />
+              View Projects <ArrowRight size={16} />
             </Link>
             <a
               href="/resume.pdf"

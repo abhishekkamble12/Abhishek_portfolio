@@ -1,14 +1,13 @@
 export const profile = {
   name: "Abhishek Kamble",
-  fullName: "Kamble Abhishek Datta",
-  title: "AI/ML Engineer & Software Engineer",
+  fullName: "Abhishek Kamble",
+  title: "Full-Stack & Backend Engineer | LLM Agents & Distributed Systems",
   tagline:
-    "I build AI systems, data-intensive applications, and production backend infrastructure.",
+    "Full-Stack Engineer shipping production features across React/TypeScript, FastAPI, and Postgres — with hands-on depth in LLM agent orchestration, tool-calling, and RAG systems built and deployed end-to-end.",
   summary:
-    "Backend engineer who builds agentic AI systems — LangGraph pipelines, RAG search, and the APIs that expose them — on FastAPI/Django and AWS/GCP. Increasingly focused on voice AI and multi-agent orchestration.",
+    "Software engineer with proven depth in LLM agent orchestration (LangGraph), citation-grounded RAG architectures, asynchronous distributed backends (FastAPI, Django, Celery), and cloud-native observability (OpenTelemetry). Active contributor to CNCF incubating projects and Linux Foundation LFX Mentorship alumnus.",
   location: "Pune, Maharashtra, India",
   email: "kambleabhishek7744@gmail.com",
-  instituteEmail: "202301070020@mitaoe.ac.in",
   phone: "+91 78229 42862",
   social: {
     github: "https://github.com/abhishekkamble12",
@@ -16,15 +15,22 @@ export const profile = {
     leetcode: "https://leetcode.com/abhishekkamble12",
   },
   education: {
-    degree: "B.Tech, Electronics and Telecommunication Engineering",
+    degree: "B.Tech in Electronics and Telecommunication Engineering",
     institute: "MIT Academy of Engineering (MITAOE), Pune",
     period: "Aug 2023 – May 2027",
-    cgpa: "7.6/10",
+    cgpa: "7.6 / 10",
+    coursework: [
+      "Operating Systems",
+      "Computer Networks",
+      "Data Structures and Algorithms",
+      "DBMS",
+      "Object-Oriented Programming",
+    ],
   },
   stats: [
-    { label: "Projects Built", value: "15+" },
-    { label: "LeetCode Rating", value: "1600+" },
-    { label: "Open Source", value: "2 CNCF PRs" },
-    { label: "Internships", value: "2" },
+    { label: "RAGAS Faithfulness", value: "0.9231" },
+    { label: "CNCF PRs Merged", value: "2 (LFX)" },
+    { label: "LeetCode Rating", value: "1550+" },
+    { label: "Global Hackathons", value: "Top 20" },
   ],
 };

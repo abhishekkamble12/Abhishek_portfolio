@@ -1,235 +1,133 @@
 # Abhishek Kamble — Master Profile / Long-Context Reference
 
 ## Contact & Identity
-- Name: Kamble Abhishek Datta (goes by Abhishek Kamble)
+- Name: Abhishek Kamble (Kamble Abhishek Datta)
 - Location: Pune, Maharashtra, India
 - Phone: +91-7822942862
-- Email: kambleabhishek7744@gmail.com | 202301070020@mitaoe.ac.in
+- Email: kambleabhishek7744@gmail.com
 - LinkedIn: linkedin.com/in/abhishek-softwaredev
 - GitHub: github.com/abhishekkamble12
 
 ## Education
 - B.Tech, Electronics and Telecommunication Engineering
 - MIT Academy of Engineering (MITAOE), Pune, Maharashtra
-- Aug 2023 – May 2027 (expected graduation 2027)
-- CGPA: 7.6/10 (also seen as 7.53/10 on one export — use 7.6 as canonical)
+- Aug 2023 – May 2027 (expected graduation May 2027)
+- CGPA: 7.6 / 10
+- Relevant Coursework: Operating Systems, Computer Networks, Data Structures and Algorithms, DBMS, Object-Oriented Programming
 
 ## Professional Summary
-Backend engineer who builds agentic AI systems — LangGraph pipelines, RAG search, and the APIs that expose them — on FastAPI/Django and AWS/GCP. Increasingly focused on voice AI and multi-agent orchestration. Top-20 finish of 500+ teams at the WeMakeDev Global Hackathon (Meta & Cerebras sponsors).
+Full-Stack & Backend Engineer shipping production features across React/TypeScript, FastAPI, and PostgreSQL — with hands-on depth in LLM agent orchestration (LangGraph), tool-calling, hybrid RAG systems, distributed backends (Celery, Redis, RabbitMQ), and cloud-native observability (OpenTelemetry). Active contributor to CNCF incubating projects and Linux Foundation LFX Mentorship alumnus.
 
 ---
 
 ## Work Experience
 
-### AI Backend Intern — VMK SI Pay (RentEdge)
-**Jun 2025 – Jul 2025, Remote**
-- Built FastAPI services for an AI property management platform: REST APIs with authentication and DB integration
-- Built an event-driven WhatsApp notification system for payment/booking updates, decoupled from the request path
-- Shipped backend features in Agile sprints, handling request validation and API design end to end
-- Designed APIs and DB queries supporting reporting, payment tracking, and operational analytics
-- Collaborated with frontend developers using Next.js/React to integrate backend APIs
-- Key skills used: Python, FastAPI, Next.js, PostgreSQL, AI Automation
+### Software Engineering Intern — VMK SI Pay (RentEdge)
+**May 2026 – Aug 2026, Remote**
+- Shipped production features end-to-end for an AI property-management platform: Next.js frontend consuming FastAPI REST endpoints, with JWT authentication, request validation, and structured error handling from UI to database.
+- Architected an event-driven, asynchronous WhatsApp notification pipeline (producer/consumer, decoupled from API request path) to support concurrent user actions without timeout risk.
+- Collaborated through technical code reviews, design discussions with founders, and cross-functional stakeholders across iterative Agile sprint cycles.
+- Key skills: Next.js, TypeScript, FastAPI, Python, PostgreSQL, JWT/RBAC, Docker
 
 ### Machine Learning Intern — SmartBridge (Frost Solutions)
-**Jun 2025 – Aug 2025, Hyderabad**
-- Built ETL pipelines processing 50K+ records/run, reducing ingestion failures by 40% via schema validation
-- Deployed time-series forecasting models (LSTM and Transformer-based) behind a REST API with Prometheus monitoring, holding sub-200ms p95 latency
-- Improved prediction accuracy by 18% through hyperparameter tuning and model comparison (motor temperature prediction from sensor data: current, voltage, RPM, ambient temperature)
-- Implemented automated hyperparameter tuning (Grid Search, Bayesian Optimization), cutting model training time from 3 hours to 45 minutes
-- Automated preprocessing pipelines; used GitHub for version control and iterative ML workflow collaboration
-- Key skills: Scikit-learn, Python, FastAPI, FAISS, PyTorch
+**Jun 2025 – Aug 2025, Hyderabad / Remote**
+- Built production ETL pipelines processing 50K+ records per run with schema validation and failure recovery, reducing ingestion failures by 40% and making pipeline runs resumable from the last successful batch.
+- Deployed a time-series forecasting model behind a monitored production REST API sustaining sub-200ms p95 latency under load.
+- Designed evaluation pipelines instrumented with MAE tracking and drift detection to monitor model performance in production-like environments before affecting downstream consumers.
+- Key skills: Python, FastAPI, PyTorch, Scikit-learn, ETL, Prometheus, Time-Series
 
 ---
 
 ## Projects (Detailed)
 
-### 1. Sampark AI Platform — Multi-Agent Government Decision Intelligence
+### 1. Monarch — Multi-Agent AI Platform on AWS
 GitHub: github.com/abhishekkamble12
-- Considered his **strongest AI/ML project**
-- Automated end-to-end citizen complaint triage via a 7-node LangGraph pipeline: intake → validation → prediction → recommendation → workflow → notification
-- Grounded every LLM recommendation in policy text via a Vertex AI Search RAG layer — citation-backed, not unverified output
-- Provisioned stack as IaC with Terraform on Google Cloud: BigQuery, Firestore, Pub/Sub, GCS
-- Deployed containerized services to Cloud Run for reproducible, one-command environment setup
-- Added SSE-based real-time agent progress streaming with human-in-the-loop approval checkpoints
-- Included pytest end-to-end test coverage and onboarding docs for team handoff
+- Led a 4-person team to architect Monarch AI, an enterprise multi-agent platform for analyzing invoices, POs, contracts, and general business documents to identify payment delays, legal exposure, MSMED interest, and generate evidence-backed recovery actions.
+- Designed the FastAPI + LangGraph orchestration layer, routing requests across planner, research, RAG, and vision agents with typed state, tool integration, persistent memory, and self-reflection-based execution.
+- Built hybrid retrieval with FAISS, BM25, Reciprocal Rank Fusion (RRF), and HyDE query expansion; implemented reflection-based validation and faithfulness checks to improve grounding and response reliability.
+- Implemented enterprise guardrails including PII masking, prompt injection defense, sliding window rate limiting (20 req/min), LangSmith observability, FastMCP server tools, and containerized Docker/AWS deployment architecture (ECS/Fargate, PostgreSQL + pgvector, S3, SQS).
+- Integrated LangSmith tracing and Docker-based services with Harness + DeepEval evaluation workflows.
 
-### 2. REDROB — AI Knowledge and Workflow Platform
-GitHub: github.com/abhishekkamble12
-- Built a GitHub Actions CI/CD pipeline: Docker images → Amazon ECR → AWS deployment on every merge
-- Asynchronous LangGraph-powered RAG platform delivering citation-backed answers from enterprise knowledge bases (document-grounded semantic retrieval)
-- Celery-based ingestion pipeline with PostgreSQL/pgvector: parsing, deduplication, chunking, embedding, indexing — non-blocking
-- Scoped every API call to its workspace with JWT auth; tagged each request/task with a trace ID for end-to-end log tracing
-- REDROB v6 (offline/CPU-only variant): candidate ranking system targeting 100,000 profiles via a 4-script pipeline (explore.py, precompute.py, rank.py, evaluate.py, orchestrated via run.sh)
-  - Uses all-MiniLM-L6-v2 embeddings, FAISS IndexFlatIP, and a cross-encoder reranker
-  - Focus: cutting runtime from 60+ minutes to under 3 minutes through architectural optimization
-
-### 3. HiveMind — Event-Driven Media / Agentic Research Platform
-GitHub: github.com/abhishekkamble12/hivemind
-- Architected an event-driven media processing platform on AWS EventBridge and Lambda, decoupling ingestion, processing, and delivery into independently scalable stages
-- Triggered each processing stage from EventBridge events — no manual hand-off between stages
-- Built a FastAPI service layer over PostgreSQL/pgvector exposing processed outputs for semantic search
-- Built a GitHub Actions CI/CD pipeline (Docker → ECR → AWS on every merge)
-- Agentic research/content platform connecting social content generation, personalized news recommendations, and video intelligence via a shared backend and cross-module learning layer
-- FastAPI REST APIs and async processing workflows with PostgreSQL/SQLAlchemy, Redis caching, JWT auth, WebSocket real-time updates, input validation, performance monitoring
-- Content intelligence pipelines: LLM-driven social generation, NLP-based topic/sentiment analysis with embeddings, hybrid recommendation scoring, engagement tracking, feedback-driven prompt refinement
-- Team size: 4
-
-### 4. Arishem — AI-Powered / Multi-Tenant RAG Backend Platform
+### 2. Arishem — Multi-Tenant RAG Backend Platform
 GitHub: github.com/abhishekkamble12/Arishem
-- AWS-native, multi-tenant RAG platform routing queries between Amazon Bedrock and Groq Llama 3.3 70B on cost/latency tradeoffs
-- Ingests PDF, DOCX, PPTX, and AWS Transcribe audio/video into citation-grounded knowledge
-- Achieved 2.2s async ingestion and 1.4s median query latency on a live corpus (validated on real PDF corpus, semantic queries avg 1.4s, confidence 0.37–0.73)
-- Decoupled ingestion from retrieval using RabbitMQ-driven async workers
-- JWT-scoped workspace isolation (3-tier RBAC roles) and workspace-scoped Qdrant filtering
-- Migrated inference from Bedrock Claude to Groq Llama 3.3 70B, reducing LLM cost ~50% and latency to 300–700ms
-- Confidence-gated retrieval bypasses low-confidence LLM calls, reducing inference calls ~20%; OOD rejection threshold at confidence <0.30 (verified on test query at 0.0986)
-- RAGAS evaluation: 0.923 Faithfulness, 0.885 Answer Relevancy, 0.890 Context Recall
-- Data-quality/observability layer: per-query logging, sliding-window drift detection, automated admin alerts, monitoring dashboards
+- Architected a multi-tenant RAG backend ingesting PDF, DOCX, PPTX, and AWS Transcribe audio/video into citation-grounded knowledge; achieved 2.2s async ingestion and median 1.4s query latency verified on a live document corpus.
+- Enforced tenant-level data trust boundaries via JWT/RBAC (3-tier roles) and workspace-scoped Qdrant payload filtering.
+- Benchmarked inference head-to-head on Bedrock Claude vs. Groq (Llama 3.3 70B), moving to Groq to cut LLM cost by ~50% and latency to 300–700ms.
+- Implemented confidence-gated generation that short-circuits LLM calls when semantic similarity falls below 0.35 (measured OOD score: 0.0986), eliminating hallucinations and reducing inference calls by a further ~20%; validated end-to-end quality via a RAGAS harness (Faithfulness 0.9231, Answer Relevancy 0.8845, Context Recall 0.8903).
+- Stack: Django REST Framework, MySQL, Qdrant, Celery, RabbitMQ, Groq (Llama 3.3 70B), AWS Bedrock (Claude), Docker, React, RAGAS
 
-### 5. ATLAS — Academic Task & Learning Agent System (Voice AI)
-GitHub: github.com/abhishekkamble12/ATLAS_Agent
-- Intelligent workflow system for document analysis, academic task support, and information retrieval (Python, FastAPI, LangChain, LangGraph)
-- Document-processing pipeline with semantic search (FAISS-backed) for contextual information access
-- Voice AI features via Deepgram STT/TTS
-- Integrated external APIs/services for document interaction, voice features, automated workflows
-- Containerized with Docker for deployment portability
-
-### 6. QueueFlow — Distributed Job Processing Platform
+### 3. QueueFlow — Distributed Job Processing System
 GitHub: github.com/abhishekkamble12/QueueFlow
-- Distributed job-processing platform: 8+ Celery workers, Redis-backed queuing
-- Benchmarked at 1,000+ task dispatches per 10-minute load test, median latency under 800ms
-- JWT-secured REST APIs for job creation, retry, cancellation
-- Validated state integrity under 200+ concurrent requests via Locust — zero duplicate executions using idempotency keys
-- Achieved 98% task completion across 5,000 tasks in 30-minute stress tests; resolved timeout failures via exponential backoff (configurable max-3-retry policy)
-- Has unit and integration tests for views and Celery tasks
-- Stack: Python, Celery, Redis, PostgreSQL, Docker, Django
+- Built QueueFlow, an asynchronous background job management system using Django REST Framework, Celery, Redis, and PostgreSQL to decouple long-running tasks from API requests and support job queuing, status tracking, retries, and cancellation.
+- Implemented a state-driven job lifecycle with owner/admin authorization, JWT authentication, job-type validation, retry and cancellation workflows, and persistent audit history capturing status transitions and triggering users.
+- Load-tested at 10/50/100 concurrent users via Locust, sustaining 0% failures up to 50 users (14.86 RPS, 390ms median); deliberately benchmarked against a SQLite backend at 100 users to expose file-locking write contention (4.26% failure rate), validating PostgreSQL as the production database in the Docker Compose stack.
+- Stack: Django, DRF, Celery, Redis, PostgreSQL, JWT, Docker, Locust
 
-### 7. LLM Cost Autopilot — Intelligent LLM Routing & Cost Optimization Platform
-GitHub: github.com/abhishekkamble12/LLM_Autopilot
-- FastAPI-based LLM gateway dynamically routing requests across providers by prompt characteristics, model capability, estimated cost, latency
-- Evaluation-driven routing pipeline benchmarking model quality, latency, token usage, cost — automated selection of cost-efficient model while preserving quality
-- Reduced blended inference cost by ~35%
-- Verification/escalation pipeline: detects weak generations and auto-upgrades to stronger models before returning results
-- OpenTelemetry-based observability with Grafana dashboards: latency, token consumption, model usage, routing decisions, cost metrics
-- Containerized (Docker) for reproducible local deployment and multi-provider evaluation
-
-### 8. CoralGuard AI — Multimodal Marine Ecosystem Detection
-GitHub: github.com/abhishekkamble12
-- Multimodal deep learning system combining 41K+ environmental records and computer vision pipelines for coral anomaly detection
-- Transfer learning workflows using EfficientNet-B3 with augmentation, class weighting, hyperparameter tuning for imbalanced classification
-- Integrated Grad-CAM explainability and Weights & Biases experiment tracking
-
-### 9. SupplySense — Probabilistic Demand Forecasting & Inventory Decision Engine
+### 4. SupplySense — Autonomous Retail Inventory & Decision Engine
 GitHub: github.com/abhishekkamble12/SupplySense
-- End-to-end demand forecasting/inventory platform: FastAPI + LightGBM
-- Produces P10/P50/P90 quantile forecasts; +34.2% lift over moving-average baseline (RMSE 2.15 units/day, MAE 1.42, R²=0.884)
-- High-throughput data pipeline across 5M+ transactional records; 65% RAM reduction via 8/16-bit downcasting, datetime optimization, long-format feature stores
-- Stochastic safety stock/reorder point engine reducing projected stockout Revenue-at-Risk by ~40%, maintaining 98% cycle-service-level for hero SKUs, 100% compliance with supplier MOQs/case-pack multiples
-- Reproducible Docker deployment with MLflow & DagsHub experiment tracking, multi-model benchmarking (LightGBM vs Gradient Boosting vs Ridge), Champion Model Registry
-- FastAPI backend serving <120ms p50 latency for real-time inventory audits and what-if simulations
+- Engineered a probabilistic demand-forecasting pipeline on 30,490+ retail SKUs (Walmart M5 dataset) using LightGBM with temporal lag and rolling features, achieving R² = 0.884 (RMSE 2.14, MAE 1.42), a 34.2% lift over rolling baselines.
+- Designed a stochastic inventory optimizer computing dynamic safety stock and reorder points (ROP) from demand-lead-time variance, driving automated purchase-order generation with MOQ clamping.
+- Benchmarked LightGBM, Gradient Boosting, Ridge, LSTM, and Temporal Fusion Transformer (TFT) candidates with MLflow/DagsHub tracking and automated champion-model selection for deployment.
+- Served the platform via a containerized FastAPI backend with SQLAlchemy/PostgreSQL persistence and a dual-layer Redis cache, exposed through an interactive dashboard for real-time forecast and inventory review (<120ms p50 latency).
+- Stack: Python, LightGBM, PyTorch (LSTM/TFT), FastAPI, PostgreSQL, Redis, MLflow, Docker
 
-### 10. GoOpsKit
+### 5. Go Service Ops Kit
 GitHub: github.com/abhishekkamble12/ops_kit
-- Production-style Go HTTP backend using net/http: 5 REST endpoints, structured JSON logging, OpenTelemetry distributed tracing, request validation, graceful shutdown
-- Automated Linux service deployment via idempotent Ansible role: non-root systemd service, templated env files, conditional restart handlers, firewalld rules on RHEL-compatible systems
-- 17 automated tests (5 success paths, 5 error-validation scenarios); verified with go vet ./...
-- Team size: 1
+- Built a Go HTTP service for RHEL-compatible Linux using the standard net/http library, with health/readiness checks, build metadata, simulated workload handling, structured JSON logging, OpenTelemetry tracing, and graceful shutdown.
+- Automated deployment with an idempotent Ansible role that provisions a non-root systemd service, renders environment configuration, manages firewalld, and conditionally restarts the service only when binaries or configuration change.
+- Hardened the Linux service with systemd sandboxing including ProtectSystem, ProtectHome, PrivateTmp, and NoNewPrivileges, while keeping SELinux enforcing and integrating logs with systemd-journald.
+- Added table-driven HTTP and configuration tests covering success paths, method enforcement, invalid inputs, and edge cases; configured GitHub Actions for go vet, race-enabled tests, Linux builds, and Ansible syntax validation.
+- Stack: Go, Ansible, systemd, OpenTelemetry, RHEL-compatible Linux, GitHub Actions, CI/CD
 
-### 11. Vehicle Insurance MLOps Pipeline
+### 6. LLM Cost Autopilot — LLM Routing and Evaluation Gateway
+GitHub: github.com/abhishekkamble12/LLM_Autopilot
+- Built an LLM inference gateway that routes requests across providers using prompt complexity, model capability, latency, and token-cost signals — cutting blended inference cost by ~35% versus a single-provider baseline.
+- Designed a verification loop where every response is scored against a stronger reference model via a RAGAS-style evaluator, with weak responses escalated rather than returned to the caller.
+- Instrumented routing decisions with OpenTelemetry traces into Grafana, surfacing per-route P95 latency, cost-per-request, and escalation rate — used to identify and retune the highest-cost prompt patterns in production.
+- Stack: Python, FastAPI, OpenTelemetry, Grafana, Docker, RAGAS
+
+### 7. CoralGuard AI — Marine Ecosystem Detection
+GitHub: github.com/abhishekkamble12/CoralGuard_AI
+- Built an EfficientNet-B3 transfer-learning pipeline for coral-health image classification, achieving 86.14% validation accuracy across multi-class reef-health categories.
+- Applied Albumentations-based augmentation to improve generalization on limited marine imagery, and HDBSCAN density-based clustering to flag anomalous ecosystem patterns without labeled anomaly data.
+- Fused 41K+ environmental telemetry records with visual predictions in an interactive Streamlit dashboard for real-time reef-health monitoring and anomaly review.
+- Stack: Python, TensorFlow, EfficientNet-B3, HDBSCAN, Streamlit, Grad-CAM
+
+### 8. Sampark AI Platform — Multi-Agent Government Decision Intelligence
 GitHub: github.com/abhishekkamble12
-- End-to-end MLOps pipeline: data ingestion, preprocessing, feature engineering, model training, deployment
-- Modular ML pipelines with automated validation, logging, experiment tracking, scalable model evaluation using Scikit-learn and MLflow
+- Automated end-to-end citizen complaint triage via a 7-node LangGraph pipeline with Vertex AI Search RAG and human-in-the-loop approval checkpoints.
+- Stack: Python, LangGraph, Vertex AI Search, Google Cloud, BigQuery, Firestore, Cloud Run
 
-### 12. URL_Shortener_API
-GitHub: github.com/abhishekkamble12/URL_Shorterner
-- Go-based REST API: URL creation, 302 redirects, click analytics, URL listing, health-check endpoints
-- Persistence layer with GORM and SQLite: unique 7-character short-code generation, URL validation, click-count tracking, DB migrations
-- Dockerized with multi-stage build and persistent volumes preserving data across container restarts
+### 9. HiveMind — Event-Driven Media & Agentic Research Platform
+GitHub: github.com/abhishekkamble12/hivemind
+- Event-driven media processing platform on AWS EventBridge and Lambda, with FastAPI service layer over PostgreSQL/pgvector for semantic search.
+- Stack: Python, FastAPI, AWS EventBridge, Lambda, PostgreSQL, pgvector, Redis, Docker
 
-### 13. Foodzgram
-GitHub: github.com/abhishekkamble12/foodgram_mern
-- Full-stack food content-sharing platform (React) for discovering/uploading/sharing recipes and videos
-- ImageKit integration for optimized image/video uploads, transformation, compression, CDN delivery
-- RESTful APIs with JWT auth and role-based access control
-- Containerized with Docker
-
-### 14. AI Customer Support Agent
-- n8n + OpenAI + Airtable + Slack
-- Routes WhatsApp/Telegram messages through an LLM-backed knowledge base with human handoff
-
-### 15. Retail Customer Behavior Analytics — End-to-End Data Analytics & BI Pipeline
-- Comprehensive retail analytics platform spanning the complete data lifecycle
-- **Data Preparation & EDA (Python)**: Cleaning and transforming raw retail datasets using Pandas and NumPy; exploratory data analysis with Jupyter Notebooks to uncover initial patterns and data quality issues
-- **Data Analysis (SQL)**: Writing complex SQL queries to extract actionable insights on customer segmentation, loyalty program effectiveness, and key purchase drivers; optimized queries for large transaction datasets
-- **Visualization (Power BI)**: Designed and deployed interactive dashboards highlighting key business patterns, trends, and metrics for stakeholder decision-making
-- **Reporting**: Created structured project reports and presentations communicating findings and actionable recommendations to business teams
-- **Key Skills**: Power BI, Python, SQL, Data Cleaning, Data Transformation, Exploratory Data Analysis (EDA), Business Intelligence, Relational Data Modeling
-
-### 16. Amazon Sales Performance & Revenue Analytics — Multi-Stage Data Analysis & KPI Dashboard
-- End-to-end sales analytics platform combining data engineering, analysis, and business intelligence
-- **End-to-End Data Analysis**: Extracted, cleaned, and analyzed complex Amazon sales datasets (including restaurant operations records) using Python (Pandas, NumPy) within Jupyter Notebooks to uncover actionable business insights
-- **Business Intelligence & Visualization**: Designed and deployed interactive Power BI dashboards visualizing key performance indicators (KPIs) including revenue tracking, customer behavior patterns, and sales performance metrics; enabled data-driven decision-making at scale
-- **Data Wrangling**: Engineered complex SQL queries to manipulate and transform raw sales data into optimized schemas for downstream exploratory data analysis and reporting
-- **Key Metrics**: Revenue trending, customer acquisition analysis, product performance tracking, margin analysis, KPI dashboards with real-time updates
-- **Key Skills**: Python, Pandas, NumPy, SQL, Power BI, Exploratory Data Analysis (EDA), Data Visualization, KPI Dashboard Development, Data Transformation
-
-### 17. Sentiment_analysis_mlopsss — AI-Native Sentiment Intelligence Platform
+### 10. Sentiment Intelligence Platform
 GitHub: github.com/abhishekkamble12/Sentiment_analysis_mlopsss
-- FastAPI/Uvicorn service with a tiered model: fast classical model (TF-IDF + LogisticRegression/LinearSVC) → DistilBERT refinement → LLM fallback (Gemma via HF Inference / Groq)
-- LangChain-based SearchAgent (DuckDuckGo + RSS) and ReportAgent for search-driven analysis and JSON reports
-- SQLAlchemy/Alembic + monitoring dashboard
-- Eval results: LinearSVC deployed as Tier 1 (accuracy 0.9439, F1-weighted 0.9436, F1-macro 0.9379, latency ~1.66s); LogisticRegression/RidgeClassifier as standby ensemble (accuracy 0.9164/0.8982); RandomForest/SVM/MultinomialNB/XGBoost also evaluated; DistilBERT (Tier 2) metrics not yet finalized
-- Subject of an IEEE-format research paper draft, targeting an external IEEE conference (specific venue TBD)
-
-### 18. PacketInsight — Network Traffic Analysis
-- Scapy/SQLAlchemy-based network traffic analysis tool
-- Validated against real public PCAP traces (12,899 packets, 0 skipped): flagged port scans, DNS floods (63 queries from one host), 4.23 MB high-volume flows
-
+- Tiered sentiment service: fast classical model (TF-IDF + LinearSVC) → DistilBERT refinement → LLM fallback, with LangChain search/report agents. Subject of an IEEE research paper draft.
+- Stack: Python, FastAPI, LangChain, DistilBERT, SQLAlchemy, Alembic
 
 ---
 
 ## Open-Source Contributions
-- **OpenTelemetry — opentelemetry-go-compile-instrumentation** (CNCF Project): Identified missing GenAI endpoint attributes and CI coverage gaps for database semantic conventions in the Go compile-time auto-instrumentation pipeline; implemented and merged fixes (PR #992, PR #1107) adding telemetry coverage and multi-process end-to-end tests for HTTP-to-OpenAI context propagation, working directly with CNCF maintainers
-- **KubeEdge — Ianvs** (CNCF Project): Root-caused a critical `ModuleNotFoundError` and invalid configuration paths breaking the Cloud Robotics benchmark suite; submitted PR #816 fixing the underlying dependency/structural issues, restoring reliable execution of the semantic segmentation benchmark
-- Contributor via Linux Foundation LFX Mentorship
+- **opentelemetry-go-compile-instrumentation (CNCF Incubating | Linux Foundation LFX Mentorship)**: Shipped pull requests with test coverage and passing CI on production observability tooling for distributed systems; added GenAI client instrumentation, telemetry coverage, and multi-process propagation tests (PR #992, PR #1107).
+- **KubeEdge Ianvs (CNCF Sandbox)**: Diagnosed and fixed a subprocess byte-output decoding/parsing bug causing intermittent failures in the interoperability test suite by tracing root cause through Python system internals (PR #816).
 
 ---
 
-## Technical Skills (Consolidated)
+## Technical Skills
 
-**Agentic AI & LLM Tooling:** LangGraph, LangChain, RAG, RAGAS Evaluation, Vertex AI Search, Multi-Agent Orchestration, MCP, Prompt Engineering, Confidence-Gated Generation, LLM Routing & Cost Optimization, pgvector, Qdrant, FAISS
-
-**Voice & NLP:** Deepgram (STT/TTS), Conversational Flow Design, Semantic Search, NLP
-
-**ML/DL:** TensorFlow, PyTorch, Scikit-learn, LightGBM, Keras, Transformers, Hugging Face, Grid Search, Bayesian Optimization, Transfer Learning, Explainable AI (Grad-CAM), Data Augmentation, Probabilistic Forecasting
-
-**Data Science & Analytics:** Pandas, NumPy, Matplotlib, Seaborn, Plotly, Feature Engineering, Data Visualization, Exploratory Data Analysis (EDA), Data Cleaning & Transformation, Relational Data Modeling, SQL Query Optimization, Business Intelligence, KPI Dashboard Development, Power BI, Tableau
-
-**Backend:** Python, Go, Django REST Framework, FastAPI, REST APIs, Async Python, JWT Auth, PostgreSQL, Node.js, Express.js
-
-**Infra & Tooling:** AWS (EC2, Lambda, RDS, Bedrock), Google Cloud (BigQuery, Firestore, Pub/Sub, GCS, Cloud Run), Docker, Kubernetes, Terraform, Celery/Redis, RabbitMQ, GitHub Actions, CI/CD, OpenTelemetry, Prometheus, Grafana, Jaeger
-
-**MLOps/Tools:** MLflow, Weights & Biases, DagsHub, Git, Linux, Jupyter Notebook
-
-**Databases/Cloud:** PostgreSQL, MongoDB, Qdrant, FAISS, MySQL, SQLite
-
-**Also:** JavaScript, TypeScript, C/C++, Java, SQL, React.js, Next.js, MongoDB, SQLAlchemy, Tableau, n8n
+- **Languages:** Python, Go, TypeScript, JavaScript, SQL, Java, C++
+- **AI & LLM Orchestration:** LangGraph, LangChain, Hybrid RAG (FAISS + BM25 + Reciprocal Rank Fusion), RAGAS Evaluation, Multi-Agent Systems, Tool Calling & FastMCP, Groq & AWS Bedrock, Prompt Security & Guardrails
+- **Backend & Distributed Systems:** FastAPI, Django & DRF, Celery, RabbitMQ, Redis, REST APIs & Microservices, JWT & RBAC Authorization, Event-Driven Architecture, Next.js
+- **Machine Learning & Data:** PyTorch, TensorFlow, LightGBM, Scikit-learn, MLflow, Time-Series Forecasting & Drift Detection, PostgreSQL & pgvector, Qdrant, SQLAlchemy, ETL Pipelines & Pandas
+- **Cloud, Systems & Observability:** AWS (ECS, S3, SQS, EC2, Lambda), Linux (RHEL, systemd sandboxing), Ansible, Docker, Kubernetes, OpenTelemetry, Prometheus, Grafana, Jaeger, GitHub Actions, CI/CD, Terraform
 
 ---
 
 ## Achievements
-- LeetCode: 1600+ rating, 300+ problems solved — consistent Medium/Hard DSA across graphs, DP & arrays
-- CodeChef: 4-Star rating
-- Top 20 of 500+ global teams — WeMakeDev Global Hackathon (Meta & Cerebras sponsors); led backend architecture and system design
-- Semi-Finalist — AWS AI for Bharat Hackathon; designed and built the AI-powered async backend end-to-end
-- UIDAI Hackathon 2026 — designed a clustering-based anomaly detection system for identifying inconsistencies in large-scale identity datasets
-
-## Certifications
-- Oracle AI Foundations Certification (Oracle Cloud) — AI/ML basics, data-driven models, cloud AI deployment
-- Introduction to Generative AI (AWS) — GANs, VAEs, transformer-based models; hands-on generative modeling with TensorFlow/PyTorch
-- Introduction to Prompt Engineering with GitHub Copilot (Microsoft)
-- Fundamentals of Deep Learning (NVIDIA) — neural networks, backpropagation, CNNs, model training
-- AI Fluency: Framework and Foundations (Anthropic)
-
-## Training / Bootcamps
-- Fullstack Web Bootcamp — Udemy (10 May 2024 – 10 Jun 2024): MERN stack (Node.js, Express.js, React.js, JavaScript, MongoDB)
+- **WeMakeDev Global Hackathon:** Top 20 of 500+ Global Teams (sponsored by Meta & Cerebras) — led backend architecture and system design
+- **AWS AI for Bharat Hackathon:** Semi-Finalist — team lead for AI-powered asynchronous backend architecture
+- **LeetCode:** 1550+ contest rating, 300+ problems solved
+- **CodeChef:** 4-Star rating

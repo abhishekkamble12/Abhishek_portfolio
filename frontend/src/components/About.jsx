@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, BookOpen } from 'lucide-react';
 import { profile } from '../data/profile';
 
 const About = () => {
@@ -29,36 +29,56 @@ const About = () => {
             {profile.summary}
           </p>
 
-          {/* What I'm learning */}
+          {/* What I'm learning & working on */}
           <p className="text-text-body text-base mb-5 leading-relaxed">
-            Currently deepening my work in multi-agent orchestration with LangGraph,
-            voice AI pipelines, and production-grade observability with OpenTelemetry.
-            I contribute to CNCF open-source projects to stay close to the tooling I use.
+            I specialize in orchestrating stateful multi-agent systems with LangGraph,
+            architecting hybrid RAG with BM25/FAISS and Reciprocal Rank Fusion,
+            and establishing distributed tracing with OpenTelemetry.
+            Through the Linux Foundation LFX Mentorship program, I contribute to CNCF incubating tooling
+            to stay grounded in production engineering best practices.
           </p>
 
           {/* What role I want */}
           <p className="text-text-body text-base mb-8 leading-relaxed">
-            I'm looking for roles where I can build AI-powered backend systems —
-            RAG platforms, agent pipelines, or ML-serving infrastructure — in a team
-            that ships often and values engineering rigor.
+            I'm looking for engineering roles where I can ship resilient LLM applications,
+            event-driven microservices, and high-performance backend pipelines in high-ownership teams.
           </p>
 
           {/* Education */}
-          <div className="card rounded-xl p-5 inline-flex items-center gap-4">
-            <div className="p-2 bg-accent/10 rounded-lg">
-              <GraduationCap className="text-accent" size={20} />
+          <div className="card rounded-xl p-6">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="p-2.5 bg-accent/10 rounded-lg text-accent shrink-0">
+                <GraduationCap size={22} />
+              </div>
+              <div>
+                <div className="text-white font-semibold text-base">
+                  {profile.education.degree}
+                </div>
+                <div className="text-text-muted text-sm mono">
+                  {profile.education.institute}
+                </div>
+                <div className="text-accent text-xs mono mt-1">
+                  {profile.education.period} · CGPA: {profile.education.cgpa}
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="text-white font-medium text-sm">
-                {profile.education.degree}
+
+            {/* Coursework */}
+            {profile.education.coursework && (
+              <div className="pt-4 border-t border-border flex flex-wrap items-center gap-2">
+                <span className="text-xs text-text-muted mono flex items-center gap-1.5 mr-1">
+                  <BookOpen size={13} className="text-accent" /> Coursework:
+                </span>
+                {profile.education.coursework.map((course) => (
+                  <span
+                    key={course}
+                    className="mono text-[11px] text-text-muted bg-surface px-2.5 py-1 rounded border border-border"
+                  >
+                    {course}
+                  </span>
+                ))}
               </div>
-              <div className="text-text-muted text-xs mono">
-                {profile.education.institute}
-              </div>
-              <div className="text-text-muted text-xs mono mt-0.5">
-                {profile.education.period} · CGPA: {profile.education.cgpa}
-              </div>
-            </div>
+            )}
           </div>
         </motion.div>
       </div>

@@ -1,68 +1,62 @@
 export const openSource = [
   {
     id: "opentelemetry",
-    project: "OpenTelemetry",
-    org: "CNCF",
+    project: "opentelemetry-go-compile-instrumentation",
+    org: "CNCF Incubating",
     repo: "opentelemetry-go-compile-instrumentation",
     description:
-      "Identified missing GenAI endpoint attributes and CI coverage gaps for database semantic conventions in the Go compile-time auto-instrumentation pipeline. Implemented and merged fixes adding telemetry coverage and multi-process end-to-end tests for HTTP-to-OpenAI context propagation.",
+      "Contributed via the Linux Foundation LFX Mentorship Program. Shipped pull requests with test coverage and passing CI on production observability tooling for distributed systems — adding GenAI client instrumentation, telemetry coverage, and multi-process propagation tests.",
     prs: [
       {
         number: 992,
         url: "https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/992",
-        title: "GenAI endpoint attributes fix",
+        title: "GenAI endpoint attributes & client instrumentation",
       },
       {
         number: 1107,
         url: "https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/1107",
-        title: "CI coverage for database semantic conventions",
+        title: "CI coverage & multi-process propagation tests",
       },
     ],
-    tech: ["Go", "OpenTelemetry", "CI/CD"],
+    tech: ["Go", "OpenTelemetry", "CI/CD", "Distributed Tracing"],
   },
   {
     id: "kubeedge-ianvs",
-    project: "KubeEdge — Ianvs",
-    org: "CNCF",
+    project: "KubeEdge Ianvs",
+    org: "CNCF Sandbox",
     repo: "ianvs",
     description:
-      "Root-caused a critical ModuleNotFoundError and invalid configuration paths breaking the Cloud Robotics benchmark suite. Submitted fix restoring reliable execution of the semantic segmentation benchmark.",
+      "Diagnosed and fixed a subprocess byte-output decoding/parsing bug causing intermittent failures in the interoperability test suite by tracing root cause through Python system internals. Validated via local testing and maintainer review.",
     prs: [
       {
         number: 816,
         url: "https://github.com/kubeedge/ianvs/pull/816",
-        title: "Fix ModuleNotFoundError and benchmark config paths",
+        title: "Fix subprocess byte-output decoding in test suite",
       },
     ],
-    tech: ["Python", "Kubernetes", "KubeEdge"],
+    tech: ["Python", "Kubernetes", "KubeEdge", "Edge AI"],
   },
 ];
 
 export const achievements = [
   {
-    label: "LeetCode",
-    value: "1600+ rating, 300+ problems",
-    detail: "Consistent Medium/Hard DSA across graphs, DP & arrays",
-  },
-  {
-    label: "CodeChef",
-    value: "4-Star rating",
-    detail: "Competitive programming",
-  },
-  {
     label: "WeMakeDev Global Hackathon",
-    value: "Top 20 of 500+ teams",
-    detail: "Meta & Cerebras sponsors; led backend architecture and system design",
+    value: "Top 20 of 500+ Teams",
+    detail: "Sponsored by Meta & Cerebras — led backend architecture and system design",
   },
   {
     label: "AWS AI for Bharat Hackathon",
     value: "Semi-Finalist",
-    detail: "Designed and built the AI-powered async backend end-to-end",
+    detail: "Team lead for AI-powered asynchronous backend architecture",
   },
   {
-    label: "UIDAI Hackathon 2026",
-    value: "Participant",
-    detail:
-      "Designed a clustering-based anomaly detection system for identifying inconsistencies in large-scale identity datasets",
+    label: "LeetCode Contest Rating",
+    value: "1550+ Rating, 300+ Solved",
+    detail: "Consistent problem solving across DP, graphs, trees, and system design",
+  },
+  {
+    label: "CodeChef",
+    value: "4-Star Rating",
+    detail: "Ranked among active competitive programming participants",
   },
 ];
