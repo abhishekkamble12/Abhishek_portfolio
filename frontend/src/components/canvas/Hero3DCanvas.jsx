@@ -112,18 +112,12 @@ const Hero3DCanvas = () => {
     lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
     lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
 
-    const lineMaterial = new THREE.LineSegmentsMaterial
-      ? new THREE.LineBasicMaterial({
-          vertexColors: true,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending,
-        })
-      : new THREE.LineBasicMaterial({
-          vertexColors: true,
-          transparent: true,
-          opacity: 0.35,
-        });
+    const lineMaterial = new THREE.LineBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
+    });
 
     const linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
     worldGroup.add(linesMesh);
