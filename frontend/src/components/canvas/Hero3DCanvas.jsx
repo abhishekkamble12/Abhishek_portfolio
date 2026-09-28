@@ -31,7 +31,7 @@ const Hero3DCanvas = () => {
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Group for mouse parallax
+    // Group for mouse & scroll parallax
     const worldGroup = new THREE.Group();
     scene.add(worldGroup);
 
@@ -159,7 +159,18 @@ const Hero3DCanvas = () => {
       targetMouseY = y * 0.8;
     };
 
+    // ==========================================
+    // Scroll Interaction (Spatial 3D Parallax)
+    // ==========================================
+    let targetScrollY = 0;
+    let scrollY = 0;
+
+    const handleScroll = () => {
+      targetScrollY = window.scrollY;
+    };
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Resize Handler
     const handleResize = () => {
@@ -185,9 +196,10 @@ const Hero3DCanvas = () => {
 
       const elapsedTime = clock.getElapsedTime();
 
-      // Smooth mouse interpolation
+      // Smooth mouse & scroll interpolation
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
+      scrollY += (targetScrollY - scrollY) * 0.06;
 
       if (!prefersReducedMotion) {
         // Rotate Central Cores
@@ -200,10 +212,13 @@ const Hero3DCanvas = () => {
         const pulse = 1 + Math.sin(elapsedTime * 1.5) * 0.05;
         innerCoreMesh.scale.set(pulse, pulse, pulse);
 
-        // Slow ambient orbit
+        // 3D Parallax: mouse rotation + scroll depth translation
         worldGroup.rotation.y = elapsedTime * 0.04 + mouseX * 0.6;
-        worldGroup.rotation.x = mouseY * 0.4;
-        starPoints.rotation.y = elapsedTime * 0.01;
+        worldGroup.rotation.x = mouseY * 0.4 + scrollY * 0.0006;
+        worldGroup.position.y = -scrollY * 0.012;
+
+        starPoints.rotation.y = elapsedTime * 0.01 + scrollY * 0.0002;
+        starPoints.position.y = -scrollY * 0.008;
 
         // Animate constellation nodes & recalculate lines
         const pos = nodeGeometry.attributes.position.array;
@@ -277,6 +292,7 @@ const Hero3DCanvas = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
 
       coreGeometry.dispose();
@@ -300,7 +316,7 @@ const Hero3DCanvas = () => {
   return (
     <div
       ref={mountRef}
-      className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
       aria-hidden="true"
     />
   );
