@@ -1,5 +1,8 @@
+import asyncio
 import logging
+import os
 
+import httpx
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -31,12 +34,36 @@ app.include_router(contact.router, prefix="/api")
 app.include_router(ai.router, prefix="/api")
 
 
+# ── Keep-alive self-ping (prevents Render free tier from sleeping) ──────────
+SELF_URL = os.getenv("RENDER_EXTERNAL_URL", "")  # Render sets this automatically
+PING_INTERVAL = 14 * 60  # 14 minutes (Render sleeps after 15 min inactivity)
+
+
+async def _keep_alive():
+    """Ping own /api/health every 14 min so Render never goes to sleep."""
+    if not SELF_URL:
+        logger.info("RENDER_EXTERNAL_URL not set — keep-alive disabled (local dev).")
+        return
+    url = f"{SELF_URL}/api/health"
+    async with httpx.AsyncClient(timeout=10) as client:
+        while True:
+            await asyncio.sleep(PING_INTERVAL)
+            try:
+                resp = await client.get(url)
+                logger.info(f"[keep-alive] ping → {url} — {resp.status_code}")
+            except Exception as exc:
+                logger.warning(f"[keep-alive] ping failed: {exc}")
+
+
 @app.on_event("startup")
 async def startup():
-    """Build the TF-IDF knowledge index at startup."""
+    """Build the TF-IDF knowledge index at startup and launch keep-alive."""
     logger.info("Initializing knowledge index...")
     initialize_index()
     logger.info("Knowledge index ready.")
+    # Start background keep-alive task
+    asyncio.create_task(_keep_alive())
+    logger.info("Keep-alive task started.")
 
 
 @app.get("/api/health")

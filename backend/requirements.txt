@@ -13,3 +13,6 @@ python-multipart==0.0.18
 # AI / RAG
 groq==0.15.0
 scikit-learn==1.6.1
+
+# HTTP client (keep-alive self-ping)
+httpx==0.28.1
