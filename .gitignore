@@ -8,7 +8,10 @@ frontend/dist-ssr/
 
 # Environment files
 .env
+.env.*
+*.env
 *.local
+backend/.env
 
 # Python
 backend/__pycache__/
